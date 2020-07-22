@@ -648,8 +648,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb9ae87787f25747b30ea02ad7aaaed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObjectName: 0
-  m_TextColor: {r: 0, g: 0, b: 0, a: 0}
+  m_ObjectName: "\u860B\u679C"
+  m_TextColor: {r: 0.754717, g: 0.11035956, b: 0.11035956, a: 1}
 --- !u!65 &726432410
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1173,8 +1173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb9ae87787f25747b30ea02ad7aaaed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObjectName: 0
-  m_TextColor: {r: 0, g: 0, b: 0, a: 0}
+  m_ObjectName: "\u65B9\u584A"
+  m_TextColor: {r: 1, g: 0.5506037, b: 0, a: 1}
 --- !u!65 &1248431267
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2095,8 +2095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb9ae87787f25747b30ea02ad7aaaed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObjectName: 0
-  m_TextColor: {r: 0, g: 0, b: 0, a: 0}
+  m_ObjectName: "\u6309\u9215"
+  m_TextColor: {r: 0, g: 0.6509434, b: 0.009854078, a: 1}
 --- !u!1 &1723211358
 GameObject:
   m_ObjectHideFlags: 0
