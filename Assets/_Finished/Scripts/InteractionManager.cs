@@ -26,12 +26,16 @@ namespace ISUExample
             m_Interactables.Remove(interactable.transform.GetInstanceID());
         }
 
-        public Interactable Access(int id)
+        public Interactable GetInteractable(int id)
         {
             if (m_Interactables.ContainsKey(id))
+            {
                 return m_Interactables[id];
+            }
             else
-                return (new Interactable() { name = "Null" });
+            {
+                return null;
+            }
         }
     }
 }

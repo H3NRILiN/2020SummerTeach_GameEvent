@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 61883288}
   - component: {fileID: 61883287}
   - component: {fileID: 61883286}
+  - component: {fileID: 61883289}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -215,6 +216,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61883284}
   m_CullTransparentMesh: 0
+--- !u!114 &61883289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61883284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd12f9196379fd4eab135f5e1ab0946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_KeyWord: _INTERACTION
+  m_TextUI: {fileID: 61883287}
 --- !u!1 &88227218
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,7 +478,7 @@ GameObject:
   - component: {fileID: 582197247}
   - component: {fileID: 582197246}
   - component: {fileID: 582197249}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +552,6 @@ MonoBehaviour:
     m_Bits: 1
   m_Length: 4
   m_Tag: Interactable
-  m_UIText: {fileID: 61883287}
 --- !u!1 &592355074
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,6 +909,7 @@ GameObject:
   - component: {fileID: 1068714914}
   - component: {fileID: 1068714915}
   - component: {fileID: 1068714916}
+  - component: {fileID: 1068714917}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -938,6 +953,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 183bf90cdadf4ad4f85f0a819a000875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1068714917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068714913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace44e0f9f939e0499aff82725149e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1104401682
@@ -2180,7 +2207,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1852993386}
-  - component: {fileID: 1852993387}
   m_Layer: 5
   m_Name: Interaction
   m_TagString: Untagged
@@ -2208,14 +2234,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1852993387
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852993385}
-  m_CullTransparentMesh: 0
 --- !u!1 &1878779850
 GameObject:
   m_ObjectHideFlags: 0

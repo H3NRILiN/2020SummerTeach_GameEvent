@@ -26,10 +26,6 @@ namespace ISUExample
             m_Camera = GetComponentInChildren<Camera>();
         }
 
-        void Update()
-        {
-
-        }
 
         void ProcessInput()
         {
@@ -40,7 +36,7 @@ namespace ISUExample
             m_Input.Jump = Input.GetButtonDown("Jump");
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             ProcessInput();
             Camera();
