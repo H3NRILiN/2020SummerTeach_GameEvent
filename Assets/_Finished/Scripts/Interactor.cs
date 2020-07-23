@@ -9,6 +9,7 @@ namespace ISUExample
         [SerializeField] LayerMask m_LayerMask;
         [SerializeField] float m_Length;
         [SerializeField] string m_Tag;
+        [SerializeField] UIInteractionPanel m_NoticeUI;
         Camera m_Camera;
         private void Start()
         {
@@ -17,9 +18,6 @@ namespace ISUExample
         }
         private void Update()
         {
-            TextElement infoText = UIManager.m_Instance.GetText("_INTERACTION");
-
-            infoText.m_TextUI.text = "";
             RaycastHit hit;
             if (Physics.Raycast(m_Camera.transform.position, m_Camera.transform.forward, out hit, m_Length, m_LayerMask))
             {
@@ -27,11 +25,21 @@ namespace ISUExample
                 {
                     Interactable obj = InteractionManager.m_Instance.GetInteractable(hit.transform.GetInstanceID());
 
-                    if (infoText == null)
-                        return;
-                    infoText.m_TextUI.text = $"當前物件 : {0}, {obj.m_ObjectName}";
-                    infoText.m_TextUI.color = obj.m_TextColor;
+                    m_NoticeUI.Show(obj.m_ObjectName, obj.m_TextColor, obj.m_UseKeyPress, "E");
+
+                    if (obj.m_UseKeyPress && Input.GetButtonDown("Interact"))
+                    {
+                        obj.StartInteract();
+                    }
                 }
+                else
+                {
+                    m_NoticeUI.Hide();
+                }
+            }
+            else
+            {
+                m_NoticeUI.Hide();
             }
         }
     }

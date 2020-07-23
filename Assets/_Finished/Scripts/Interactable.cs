@@ -8,6 +8,7 @@ namespace ISUExample
     {
         public string m_ObjectName;
         public Color m_TextColor = Color.white;
+        public bool m_UseKeyPress = false;
         private void Reset()
         {
             this.tag = "Interactable";
@@ -18,9 +19,9 @@ namespace ISUExample
         }
 
         // Update is called once per frame
-        void Update()
+        public void StartInteract()
         {
-
+            Debug.Log($"與{m_ObjectName}互動");
         }
     }
 }
