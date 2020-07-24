@@ -528,7 +528,7 @@ MonoBehaviour:
   m_ObjectName: "\u9580\u958B\u95DC"
   m_TextColor: {r: 0.7976914, g: 1, b: 0.3726415, a: 1}
   m_UseKeyPress: 1
-  m_Event: {fileID: 0}
+  m_Event: {fileID: 11400000, guid: 1c57fdc3337332749b7bc968ec4c9659, type: 2}
   m_PickupScript: {fileID: 0}
 --- !u!114 &303228339
 MonoBehaviour:
@@ -818,8 +818,11 @@ GameObject:
   - component: {fileID: 334014280}
   - component: {fileID: 334014279}
   - component: {fileID: 334014278}
+  - component: {fileID: 334014285}
+  - component: {fileID: 334014284}
+  - component: {fileID: 334014283}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1108,13 +1111,71 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334014277}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.2000003, y: -0, z: 4.8}
+  m_LocalRotation: {x: -0, y: 0.000000014901161, z: -0, w: 1}
+  m_LocalPosition: {x: 4.2, y: 0, z: 4.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &334014283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334014277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e008ae019ee0e4b45b9000d133e48628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Event: {fileID: 11400000, guid: 1c57fdc3337332749b7bc968ec4c9659, type: 2}
+  m_Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 334014284}
+        m_MethodName: DoorControl
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &334014284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334014277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69da8cc048df754449e1baa0ff5c62d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &334014285
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334014277}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 276d0db905168d54eb483385c893b5ff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &403622713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1547,6 @@ GameObject:
   - component: {fileID: 582197247}
   - component: {fileID: 582197246}
   - component: {fileID: 582197249}
-  - component: {fileID: 582197250}
   m_Layer: 2
   m_Name: PlayerController
   m_TagString: Untagged
@@ -1561,22 +1621,6 @@ MonoBehaviour:
     m_Bits: 1
   m_InteractDistance: 4
   m_NoticeUI: {fileID: 1852993387}
---- !u!114 &582197250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 582197245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c30cd7672f96562449dbdb0c09b9434e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 0}
-  response:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &592355074
 GameObject:
   m_ObjectHideFlags: 0
