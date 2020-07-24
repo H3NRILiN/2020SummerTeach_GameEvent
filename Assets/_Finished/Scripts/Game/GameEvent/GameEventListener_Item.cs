@@ -17,10 +17,5 @@ public class GameEventListener_Item : GameEventListenerCore<GameItem>
         get { return response; }
         set { response = (UnityEvent_Item)value; }
     }
-
-    [System.Serializable]
-    public class UnityEvent_Item : UnityEvent<GameItem>
-    {
-    }
 }
 

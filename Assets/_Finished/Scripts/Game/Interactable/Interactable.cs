@@ -9,7 +9,7 @@ namespace ISUExample
         public string m_ObjectName;
         public Color m_TextColor = Color.white;
         public bool m_UseKeyPress = false;
-        [SerializeField] GameEvent_Item m_Event;
+        [SerializeField] GameEvent m_Event;
         public Pickupable m_PickupScript;
         private void Reset()
         {
@@ -33,7 +33,7 @@ namespace ISUExample
 
             if (m_Event)
             {
-                m_Event.Response(m_PickupScript.m_Item);
+                m_Event.DoInvoke();
             }
 
             if (m_PickupScript)

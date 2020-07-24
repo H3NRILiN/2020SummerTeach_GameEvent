@@ -4,16 +4,24 @@ using UnityEngine;
 using UnityEngine.Events;
 public abstract class GameEventCore : ScriptableObject
 {
-    //Listener List
+    List<GameEventListenerCore> m_Listeners = new List<GameEventListenerCore>();
 
-    public void Register(GameEventListenerCore listenerCore)
+    public void Register(GameEventListenerCore listener)
     {
-        Debug.Log(listenerCore.name);
+        m_Listeners.Add(listener);
     }
 
-    public void UnRegister(GameEventListenerCore listenerCore)
+    public void UnRegister(GameEventListenerCore listener)
     {
-        Debug.Log(listenerCore.name);
+        m_Listeners.Remove(listener);
+    }
+
+    public void DoInvoke()
+    {
+        for (int i = 0; i < m_Listeners.Count; i++)
+        {
+            m_Listeners[i].m_Response.Invoke();
+        }
     }
 }
 

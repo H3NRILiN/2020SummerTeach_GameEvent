@@ -528,6 +528,7 @@ MonoBehaviour:
   m_ObjectName: "\u9580\u958B\u95DC"
   m_TextColor: {r: 0.7976914, g: 1, b: 0.3726415, a: 1}
   m_UseKeyPress: 1
+  m_Event: {fileID: 0}
   m_PickupScript: {fileID: 0}
 --- !u!114 &303228339
 MonoBehaviour:
@@ -1485,6 +1486,7 @@ GameObject:
   - component: {fileID: 582197247}
   - component: {fileID: 582197246}
   - component: {fileID: 582197249}
+  - component: {fileID: 582197250}
   m_Layer: 2
   m_Name: PlayerController
   m_TagString: Untagged
@@ -1559,6 +1561,22 @@ MonoBehaviour:
     m_Bits: 1
   m_InteractDistance: 4
   m_NoticeUI: {fileID: 1852993387}
+--- !u!114 &582197250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582197245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c30cd7672f96562449dbdb0c09b9434e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &592355074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,6 +1642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa65216fe29ecab42a9c0f4218362852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Item: {fileID: 0}
 --- !u!114 &622949992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1639,6 +1658,7 @@ MonoBehaviour:
   m_ObjectName: "\u6389\u843D\u7269"
   m_TextColor: {r: 1, g: 1, b: 1, a: 1}
   m_UseKeyPress: 1
+  m_Event: {fileID: 0}
   m_PickupScript: {fileID: 622949991}
 --- !u!135 &622949994
 SphereCollider:
@@ -1795,6 +1815,7 @@ MonoBehaviour:
   m_ObjectName: "\u860B\u679C"
   m_TextColor: {r: 0.754717, g: 0.11035956, b: 0.11035956, a: 1}
   m_UseKeyPress: 1
+  m_Event: {fileID: 0}
   m_PickupScript: {fileID: 0}
 --- !u!65 &726432410
 BoxCollider:
@@ -2806,6 +2827,7 @@ MonoBehaviour:
   m_ObjectName: "\u65B9\u584A"
   m_TextColor: {r: 1, g: 0.5506037, b: 0, a: 1}
   m_UseKeyPress: 0
+  m_Event: {fileID: 0}
   m_PickupScript: {fileID: 0}
 --- !u!65 &1248431267
 BoxCollider:
@@ -3987,6 +4009,7 @@ MonoBehaviour:
   m_ObjectName: "\u6309\u9215"
   m_TextColor: {r: 0, g: 0.6509434, b: 0.009854078, a: 1}
   m_UseKeyPress: 0
+  m_Event: {fileID: 0}
   m_PickupScript: {fileID: 0}
 --- !u!1 &1605036707
 GameObject:
