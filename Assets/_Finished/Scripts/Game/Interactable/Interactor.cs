@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ISUExample
+namespace ISU.Example
 {
     public class Interactor : MonoBehaviour
     {
         [SerializeField] LayerMask m_LayerMask;
         [SerializeField] float m_InteractDistance;
-        [SerializeField] UIInteractionPanel m_NoticeUI;
+
+
+        [SerializeField] GameEvent m_OnInteract;
+        [SerializeField] GameEvent m_OnPickup;
+
+        UIInteractionPanel m_NoticeUI;
         Camera m_Camera;
         private void Start()
         {
             m_Camera = GetComponentInChildren<Camera>();
-
+            m_NoticeUI = FindObjectOfType<UIInteractionPanel>();
         }
         private void Update()
         {
@@ -43,6 +48,11 @@ namespace ISUExample
             if (inteObj.m_UseKeyPress && Input.GetButtonDown("Interact"))
             {
                 inteObj.OnInteract();
+                m_OnInteract.DoInvoke();
+                if (inteObj.m_SubInteractor is Pickupable)
+                {
+                    m_OnPickup.DoInvoke();
+                }
             }
         }
     }

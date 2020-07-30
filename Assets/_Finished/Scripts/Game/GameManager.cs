@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace ISUExample
+namespace ISU.Example
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] PlayerController m_PlayerPrefab;
+
+        static PlayerController m_Player;
         private void Awake()
         {
-            Application.targetFrameRate = 60;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            m_Player = FindObjectOfType<PlayerController>();
+            if (!m_Player)
+                m_Player = Instantiate(m_Player);
 
+            Application.targetFrameRate = 60;
+
+            FPSCursorLock(true);
             Input.imeCompositionMode = IMECompositionMode.Off;
         }
         // Start is called before the first frame update
@@ -25,6 +31,22 @@ namespace ISUExample
         void Update()
         {
 
+        }
+
+        public static void FPSCursorLock(bool on)
+        {
+            if (on)
+            {
+                m_Player.m_CanMove = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                m_Player.m_CanMove = false;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
         }
     }
 }

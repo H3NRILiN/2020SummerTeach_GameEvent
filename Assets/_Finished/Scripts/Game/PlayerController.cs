@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ISUExample
+namespace ISU.Example
 {
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
@@ -13,6 +13,8 @@ namespace ISUExample
         [SerializeField] float m_WalkSpeed;
         [SerializeField] float m_JumpHeight;
 
+        [SerializeField] GameEvent m_OnJumpEvent;
+
         Camera m_Camera;
         CharacterController m_CharacterController;
         ControllerInput m_Input;
@@ -20,6 +22,8 @@ namespace ISUExample
         Vector3 m_DesiredMovement;
         Vector2 m_DesiredRotation;
         Vector2 m_RoationDampVelocity;
+
+        public bool m_CanMove;
         void Start()
         {
             m_CharacterController = GetComponent<CharacterController>();
@@ -38,18 +42,24 @@ namespace ISUExample
 
         private void Update()
         {
-            ProcessInput();
-            Camera();
+            if (m_CanMove)
+            {
+                ProcessInput();
+                Camera();
+            }
             Movement();
         }
 
         void Movement()
         {
-            m_DesiredMovement.x = m_Input.Horizontal * m_WalkSpeed;
-            m_DesiredMovement.z = m_Input.Vertical * m_WalkSpeed;
-            m_DesiredMovement = transform.TransformDirection(m_DesiredMovement);
+            if (m_CanMove)
+            {
+                m_DesiredMovement.x = m_Input.Horizontal * m_WalkSpeed;
+                m_DesiredMovement.z = m_Input.Vertical * m_WalkSpeed;
+                m_DesiredMovement = transform.TransformDirection(m_DesiredMovement);
+            }
 
-            if (m_CharacterController.isGrounded)
+            if (m_CharacterController.isGrounded && m_CanMove)
             {
                 m_DesiredMovement.y = -2;
                 if (m_Input.Jump)
@@ -71,6 +81,8 @@ namespace ISUExample
         void Jump()
         {
             m_DesiredMovement.y = Mathf.Sqrt(2 * -Physics.gravity.y * m_JumpHeight);
+            AchievementManager.m_Instance.AddCount("A_Jump");
+            m_OnJumpEvent.DoInvoke();
         }
 
         void Camera()

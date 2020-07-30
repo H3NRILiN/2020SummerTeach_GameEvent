@@ -2,6 +2,6 @@
 using UnityEngine.Events;
 
 [Serializable]
-public class UnityEvent_Item : UnityEvent<GameItem>
+public class UnityEvent_Item : UnityEvent<ItemObject>
 {
 }

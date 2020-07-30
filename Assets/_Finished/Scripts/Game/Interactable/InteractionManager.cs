@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ISUExample
+namespace ISU.Example
 {
     public class InteractionManager : MonoBehaviour
     {

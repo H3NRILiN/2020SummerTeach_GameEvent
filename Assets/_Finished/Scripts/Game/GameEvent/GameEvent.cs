@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace ISUExample
+namespace ISU.Example
 {
-    [CreateAssetMenu(menuName = "_Finished/GameEvent")]
+    [CreateAssetMenu(menuName = "_Finished/GameEvent/NewGameEvent")]
     public class GameEvent : GameEventCore
     {
 
