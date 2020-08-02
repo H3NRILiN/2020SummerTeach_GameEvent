@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: fd6b0059096e18545a589469b429df1a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_AchievementManager: {fileID: 11400000, guid: c88defb632696ee47b6ba1988e3e6e0c,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

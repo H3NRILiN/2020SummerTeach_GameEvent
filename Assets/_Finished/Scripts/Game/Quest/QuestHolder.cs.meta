@@ -3,7 +3,8 @@ guid: 9b0d4ff51a08c2b4da82cfb4ebb5e13a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_QuestContainer: {fileID: 11400000, guid: 33757b29346997940adad82c1f4ff5d3, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

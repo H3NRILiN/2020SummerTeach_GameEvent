@@ -7,14 +7,7 @@ namespace ISU.Example
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] float m_RotationXSpeed;
-        [SerializeField] float m_RotationYSpeed;
-        [SerializeField] float m_DampTime;
-        [SerializeField] float m_WalkSpeed;
-        [SerializeField] float m_JumpHeight;
-
-        [SerializeField] GameEvent m_OnJumpEvent;
-
+        [SerializeField] PlayerConfig m_Config;
         Camera m_Camera;
         CharacterController m_CharacterController;
         ControllerInput m_Input;
@@ -54,8 +47,8 @@ namespace ISU.Example
         {
             if (m_CanMove)
             {
-                m_DesiredMovement.x = m_Input.Horizontal * m_WalkSpeed;
-                m_DesiredMovement.z = m_Input.Vertical * m_WalkSpeed;
+                m_DesiredMovement.x = m_Input.Horizontal * m_Config.m_WalkSpeed;
+                m_DesiredMovement.z = m_Input.Vertical * m_Config.m_WalkSpeed;
                 m_DesiredMovement = transform.TransformDirection(m_DesiredMovement);
             }
 
@@ -80,22 +73,22 @@ namespace ISU.Example
 
         void Jump()
         {
-            m_DesiredMovement.y = Mathf.Sqrt(2 * -Physics.gravity.y * m_JumpHeight);
-            AchievementManager.m_Instance.AddCount("A_Jump");
-            m_OnJumpEvent.DoInvoke();
+            m_DesiredMovement.y = Mathf.Sqrt(2 * -Physics.gravity.y * m_Config.m_JumpHeight);
+            m_Config.m_AchievementManager.AddCount("A_Jump");
+            m_Config.m_OnJumpEvent.DoInvoke();
         }
 
         void Camera()
         {
-            m_DesiredRotation.x += -m_Input.MouseY * m_RotationXSpeed * Time.deltaTime;
-            m_DesiredRotation.y += m_Input.MouseX * m_RotationYSpeed * Time.deltaTime;
+            m_DesiredRotation.x += -m_Input.MouseY * m_Config.m_RotationXSpeed * Time.deltaTime;
+            m_DesiredRotation.y += m_Input.MouseX * m_Config.m_RotationYSpeed * Time.deltaTime;
 
             var camRot = m_Camera.transform.rotation.eulerAngles;
-            camRot.x = Mathf.SmoothDampAngle(camRot.x, m_DesiredRotation.x, ref m_RoationDampVelocity.x, m_DampTime);
+            camRot.x = Mathf.SmoothDampAngle(camRot.x, m_DesiredRotation.x, ref m_RoationDampVelocity.x, m_Config.m_DampTime);
             m_Camera.transform.rotation = Quaternion.Euler(camRot);
 
             var characterRot = transform.rotation.eulerAngles;
-            characterRot.y = Mathf.SmoothDampAngle(characterRot.y, m_DesiredRotation.y, ref m_RoationDampVelocity.y, m_DampTime);
+            characterRot.y = Mathf.SmoothDampAngle(characterRot.y, m_DesiredRotation.y, ref m_RoationDampVelocity.y, m_Config.m_DampTime);
             transform.rotation = Quaternion.Euler(characterRot);
         }
 

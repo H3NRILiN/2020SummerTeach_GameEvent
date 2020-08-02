@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb9ae87787f25747b30ea02ad7aaaed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InteractionManager: {fileID: 11400000, guid: f0a106ae0ad8bd445b296cf0245f11b4,
+    type: 2}
   m_ObjectName: "\u6389\u843D\u7269"
   m_TextColor: {r: 1, g: 1, b: 1, a: 1}
   m_UseKeyPress: 1
@@ -126,5 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa65216fe29ecab42a9c0f4218362852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_QuestManger: {fileID: 11400000, guid: 33757b29346997940adad82c1f4ff5d3, type: 2}
+  m_AchievementManager: {fileID: 11400000, guid: c88defb632696ee47b6ba1988e3e6e0c,
+    type: 2}
   m_Item: {fileID: 11400000, guid: 8f6697cd2ee62e94c9ccb04cdb8a9463, type: 2}
   m_ItemCount: 1

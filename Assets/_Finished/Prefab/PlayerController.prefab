@@ -65,12 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34ea933b1cb6da4bb6b3100edbc5752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RotationXSpeed: 45
-  m_RotationYSpeed: 45
-  m_DampTime: 0.05
-  m_WalkSpeed: 4
-  m_JumpHeight: 1
-  m_OnJumpEvent: {fileID: 11400000, guid: 35d284d7b2982ee46a25fae8d8f2b6e6, type: 2}
+  m_Config: {fileID: 11400000, guid: 9bfa44d350feac443a3a8043e671bf89, type: 2}
+  m_CanMove: 0
 --- !u!114 &8958179011216060046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,6 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08cfc9e12f25bf44ab79e97cc7290fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InteractionManager: {fileID: 11400000, guid: f0a106ae0ad8bd445b296cf0245f11b4,
+    type: 2}
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 1

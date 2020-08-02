@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MultiTag : MonoBehaviour
 {
-    public List<string> tags;
+    public List<string> tags = new List<string>();
 
     private void Reset()
     {

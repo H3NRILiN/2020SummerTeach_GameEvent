@@ -9,6 +9,7 @@ namespace ISU.Example
     [SelectionBase]
     public class Interactable : MonoBehaviour
     {
+        [SerializeField] InteractionManager m_InteractionManager;
         public string m_ObjectName;
         //顏色 (用於字等等的)
         public Color m_TextColor = Color.white;
@@ -16,8 +17,19 @@ namespace ISU.Example
         public bool m_UseKeyPress = false;
         //互動時觸發事件
         [SerializeField] UnityEvent m_Event;
-        //Pickup參考, 決定物件是否為Pickup *新增Pickup時自動加入
+
         public SubInteractor m_SubInteractor;
+
+        public void Initialize(Interactable interactable)
+        {
+            m_InteractionManager = interactable.m_InteractionManager;
+            m_ObjectName = interactable.m_ObjectName;
+            m_TextColor = interactable.m_TextColor;
+            m_UseKeyPress = interactable.m_UseKeyPress;
+            m_Event = interactable.m_Event;
+            m_SubInteractor = interactable.m_SubInteractor;
+        }
+
         private void Reset()
         {
             //自動設置Tag
@@ -26,7 +38,7 @@ namespace ISU.Example
         void Start()
         {
             //註冊進Interaction Manager
-            InteractionManager.m_Instance.Register(this);
+            m_InteractionManager.Register(this);
         }
 
         //開始互動
@@ -47,7 +59,7 @@ namespace ISU.Example
         private void OnDestroy()
         {
             //取消註冊
-            InteractionManager.m_Instance.UnRegister(this);
+            m_InteractionManager.UnRegister(this);
         }
 
         private void OnDrawGizmosSelected()
@@ -59,15 +71,28 @@ namespace ISU.Example
                 {
                     if (m_Event.GetPersistentTarget(i) && m_Event.GetPersistentTarget(i) is Component)
                     {
-                        var pos = ((Component)m_Event.GetPersistentTarget(i)).transform.position;
-                        Gizmos.color = Color.green;
-                        Gizmos.DrawLine(transform.position, pos);
-                        Gizmos.DrawSphere(pos, .05f);
-
+                        DrawGizmosLine(((Component)m_Event.GetPersistentTarget(i)).transform.position);
                     }
 
+                    if (m_Event.GetPersistentTarget(i) && m_Event.GetPersistentTarget(i) is GameEventCore)
+                    {
+                        foreach (var gl in Resources.FindObjectsOfTypeAll(typeof(GameEventListenerCore)))
+                        {
+                            if (((GameEventListenerCore)gl).m_Event == (GameEventCore)m_Event.GetPersistentTarget(i))
+                            {
+                                DrawGizmosLine(((GameEventListenerCore)gl).transform.position);
+                            }
+                        }
+                    }
                 }
             }
+        }
+
+        private void DrawGizmosLine(Vector3 pos)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, pos);
+            Gizmos.DrawSphere(pos, .05f);
         }
     }
 }

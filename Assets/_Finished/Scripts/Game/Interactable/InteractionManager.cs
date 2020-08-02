@@ -4,14 +4,13 @@ using UnityEngine;
 
 namespace ISU.Example
 {
-    public class InteractionManager : MonoBehaviour
+    [CreateAssetMenu(menuName = "_Finished/InteractionManager")]
+    public class InteractionManager : ScriptableObject
     {
         Dictionary<int, Interactable> m_Interactables;
-        public static InteractionManager m_Instance;
 
-        private void Awake()
+        private void OnEnable()
         {
-            m_Instance = this;
 
             m_Interactables = new Dictionary<int, Interactable>();
         }

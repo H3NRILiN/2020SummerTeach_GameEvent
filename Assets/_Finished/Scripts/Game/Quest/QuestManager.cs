@@ -1,22 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class QuestManager : MonoBehaviour
+[CreateAssetMenu(menuName = "_Finished/QuestManager")]
+public class QuestManager : ScriptableObject
 {
     Dictionary<ItemObject, List<Quest>> m_ItemMatchedQuests;
     Dictionary<string, Quest> m_NameMatchedQuests;
 
-
-    public static QuestManager m_Instance;
-    private void Awake()
+    private void OnEnable()
     {
-        m_Instance = this;
-
         m_ItemMatchedQuests = new Dictionary<ItemObject, List<Quest>>();
         m_NameMatchedQuests = new Dictionary<string, Quest>();
     }
-
     public bool Contains(Quest quest)
     {
         return m_NameMatchedQuests.ContainsKey(quest.name);
@@ -71,5 +66,4 @@ public class QuestManager : MonoBehaviour
     {
         AddCount(IDName, 1);
     }
-
 }

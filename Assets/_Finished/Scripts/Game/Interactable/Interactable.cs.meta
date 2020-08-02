@@ -3,7 +3,10 @@ guid: efb9ae87787f25747b30ea02ad7aaaed
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_InteractionManager: {fileID: 11400000, guid: f0a106ae0ad8bd445b296cf0245f11b4,
+      type: 2}
+  - m_SubInteractor: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

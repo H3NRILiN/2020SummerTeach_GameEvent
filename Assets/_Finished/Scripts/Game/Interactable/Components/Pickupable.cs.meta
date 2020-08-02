@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fa65216fe29ecab42a9c0f4218362852
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_QuestManger: {fileID: 11400000, guid: 33757b29346997940adad82c1f4ff5d3, type: 2}
+  - m_AchievementManager: {fileID: 11400000, guid: c88defb632696ee47b6ba1988e3e6e0c,
+      type: 2}
+  - m_Item: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

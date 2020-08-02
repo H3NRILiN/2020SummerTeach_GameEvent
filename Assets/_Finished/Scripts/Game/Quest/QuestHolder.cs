@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class QuestHolder : MonoBehaviour
 {
+    [SerializeField] QuestManager m_QuestManger;
     public static Action<Quest[]> m_OnQuestPanelOpen;
     [SerializeField] Quest[] m_Quests;
 
@@ -14,7 +15,7 @@ public class QuestHolder : MonoBehaviour
     }
     public void RegisterQuestAt(int index)
     {
-        QuestManager.m_Instance.RegisterQuest(m_Quests[index]);
+        m_QuestManger.RegisterQuest(m_Quests[index]);
     }
 
 }
