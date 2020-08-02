@@ -17,10 +17,18 @@ namespace ISU.Example
         IEnumerator CurrentBuildPanelCoroutine;
         private void Start()
         {
-            QuestHolder.m_OnQuestPanelOpen += PanelOpen;
+
             m_Panel.SetActive(false);
         }
 
+        private void OnEnable()
+        {
+            QuestHolder.m_OnQuestPanelOpen += PanelOpen;
+        }
+        private void OnDisable()
+        {
+            QuestHolder.m_OnQuestPanelOpen -= PanelOpen;
+        }
         void PanelOpen(Quest[] quests)
         {
             CurrentBuildPanelCoroutine = BuildPanelContent(quests);

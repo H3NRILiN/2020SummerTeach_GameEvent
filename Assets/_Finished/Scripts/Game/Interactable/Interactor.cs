@@ -18,15 +18,16 @@ namespace ISU.Example
         UIInteractionPanel m_NoticeUI;
         Camera m_Camera;
 
-        int m_CurrentInteractingID = -1;
-        int m_LastInteractedID;
-        Interactable m_CurrentInteracting;
+        int m_CurrentFocusingID = -1;
+        int m_LastFocusedID;
+        Interactable m_CurrentFocusing;
+        [SerializeField] bool m_Debug;
         private void Start()
         {
 
             m_Camera = GetComponentInChildren<Camera>();
             m_NoticeUI = FindObjectOfType<UIInteractionPanel>();
-            OnEndInteract();
+            OnEndFocus();
         }
         private void Update()
         {
@@ -35,75 +36,81 @@ namespace ISU.Example
             {
                 if (hit.transform.CompareTag("Interactable"))
                 {
-                    Interact(m_InteractionManager.GetInteractable(hit.transform.GetInstanceID()));
+                    Interactable interactable = m_InteractionManager.GetInteractable(hit.transform.GetInstanceID());
+                    if (interactable == null) return;
+                    m_CurrentFocusingID = interactable.transform.GetInstanceID();
+                    m_CurrentFocusing = interactable;
                 }
                 else
                 {
-                    m_CurrentInteractingID = m_NullInstanceID;
-                    m_CurrentInteracting = null;
+                    m_CurrentFocusingID = m_NullInstanceID;
+                    m_CurrentFocusing = null;
                 }
             }
             else
             {
-                m_CurrentInteractingID = m_NullInstanceID;
-                m_CurrentInteracting = null;
+                m_CurrentFocusingID = m_NullInstanceID;
+                m_CurrentFocusing = null;
             }
 
 
-            if (m_CurrentInteractingID != m_NullInstanceID)
+            if (m_CurrentFocusingID != m_NullInstanceID)
             {
-                if (m_LastInteractedID != m_CurrentInteractingID)
+                if (m_LastFocusedID != m_CurrentFocusingID)
                 {
-                    OnBeginInteract();
+                    OnBeginFocus();
                 }
-                OnInteracting();
+                OnFocusing();
             }
 
-            if (m_CurrentInteractingID == m_NullInstanceID)
+            if (m_CurrentFocusingID == m_NullInstanceID)
             {
-                if (m_CurrentInteractingID != m_LastInteractedID)
+                if (m_CurrentFocusingID != m_LastFocusedID)
                 {
-                    OnEndInteract();
+                    OnEndFocus();
                 }
             }
 
-            m_LastInteractedID = m_CurrentInteractingID;
+            m_LastFocusedID = m_CurrentFocusingID;
         }
-        void OnBeginInteract()
+        void OnBeginFocus()
         {
-            Debug.Log("OnBeginInteract");
-            m_NoticeUI.Show(m_CurrentInteracting.m_ObjectName
-            , m_CurrentInteracting.m_TextColor
-            , m_CurrentInteracting.m_UseKeyPress, "E");
+            if (m_Debug) Debug.Log("<color=lime>OnBeginFocus</color>");
+            m_NoticeUI.Show(m_CurrentFocusing.m_ObjectName
+            , m_CurrentFocusing.m_TextColor
+            , m_CurrentFocusing.m_UseKeyPress, "E");
         }
-        void OnInteracting()
+        void OnFocusing()
         {
-            Debug.Log("OnInteract");
+            // Debug.Log("OnFocusing");
+            if (m_CurrentFocusing.m_UseKeyPress && Input.GetButtonDown("Interact"))
+            {
+                OnInteract();
+            }
         }
 
-        void OnEndInteract()
+        void OnEndFocus()
         {
-            Debug.Log("OnEndInteract");
+            if (m_Debug) Debug.Log("<color=red>OnEndFocus</color>");
             m_NoticeUI.Hide();
         }
 
-
-
-
-        private void Interact(Interactable inteObj)
+        void OnInteract()
         {
-            if (inteObj == null) return;
-            m_CurrentInteractingID = inteObj.transform.GetInstanceID();
-            m_CurrentInteracting = inteObj;
+            if (m_Debug) Debug.Log("<color=aqua>OnInteract</color>");
+            Interact();
+        }
 
-            if (inteObj.m_UseKeyPress && Input.GetButtonDown("Interact"))
+
+
+        private void Interact()
+        {
+            m_CurrentFocusing.OnInteract();
+            m_OnInteract.Raise();
+            if (m_CurrentFocusing.m_SubInteractor
+            && m_CurrentFocusing.m_SubInteractor.GetType() == typeof(Pickupable))
             {
-                inteObj.OnInteract();
-                m_OnInteract.DoInvoke();
-                if (inteObj.m_SubInteractor && inteObj.m_SubInteractor.GetType() == typeof(Pickupable))
-                {
-                    m_OnPickup.DoInvoke();
-                }
+                m_OnPickup.Raise();
             }
         }
     }

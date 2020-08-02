@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6798ec5a8998304bb8da23966952bde, type: 3}
-  m_Name: FloatVariable
+  m_Script: {fileID: 11500000, guid: 316b7fa4567a9164cae58e9ad31a4c8d, type: 3}
+  m_Name: TrackingQuestMax
   m_EditorClassIdentifier: 
-  customValue: 0
-  usingCustomValue: 0
+  staticValue: 6
+  useStaticValue: 1

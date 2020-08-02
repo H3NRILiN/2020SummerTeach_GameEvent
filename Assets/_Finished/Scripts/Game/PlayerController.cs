@@ -51,6 +51,11 @@ namespace ISU.Example
                 m_DesiredMovement.z = m_Input.Vertical * m_Config.m_WalkSpeed;
                 m_DesiredMovement = transform.TransformDirection(m_DesiredMovement);
             }
+            else
+            {
+                m_DesiredMovement.x = 0;
+                m_DesiredMovement.z = 0;
+            }
 
             if (m_CharacterController.isGrounded && m_CanMove)
             {
@@ -75,7 +80,7 @@ namespace ISU.Example
         {
             m_DesiredMovement.y = Mathf.Sqrt(2 * -Physics.gravity.y * m_Config.m_JumpHeight);
             m_Config.m_AchievementManager.AddCount("A_Jump");
-            m_Config.m_OnJumpEvent.DoInvoke();
+            m_Config.m_OnJumpEvent.Raise();
         }
 
         void Camera()

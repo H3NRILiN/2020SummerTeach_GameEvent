@@ -20,20 +20,15 @@ namespace ISU.Example
 
         public SubInteractor m_SubInteractor;
 
-        public void Initialize(Interactable interactable)
-        {
-            m_InteractionManager = interactable.m_InteractionManager;
-            m_ObjectName = interactable.m_ObjectName;
-            m_TextColor = interactable.m_TextColor;
-            m_UseKeyPress = interactable.m_UseKeyPress;
-            m_Event = interactable.m_Event;
-            m_SubInteractor = interactable.m_SubInteractor;
-        }
-
         private void Reset()
         {
             //自動設置Tag
             this.tag = "Interactable";
+
+            // if (GetComponent<Collider>() == null)
+            // {
+            //     gameObject.AddComponent<BoxCollider>();
+            // }
         }
         void Start()
         {
@@ -62,22 +57,25 @@ namespace ISU.Example
             m_InteractionManager.UnRegister(this);
         }
 
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
             var eventCount = m_Event.GetPersistentEventCount();
             if (eventCount > 0)
             {
                 for (int i = 0; i < eventCount; i++)
                 {
+                    //普通物件限定Component來抓取位置
+                    //特殊狀況則是GameEvent
                     if (m_Event.GetPersistentTarget(i) && m_Event.GetPersistentTarget(i) is Component)
                     {
                         DrawGizmosLine(((Component)m_Event.GetPersistentTarget(i)).transform.position);
                     }
-
-                    if (m_Event.GetPersistentTarget(i) && m_Event.GetPersistentTarget(i) is GameEventCore)
+                    else if (m_Event.GetPersistentTarget(i) && m_Event.GetPersistentTarget(i) is GameEventCore)
                     {
+                        //尋找所有GameEventListener
                         foreach (var gl in Resources.FindObjectsOfTypeAll(typeof(GameEventListenerCore)))
                         {
+                            //如果是這個Event
                             if (((GameEventListenerCore)gl).m_Event == (GameEventCore)m_Event.GetPersistentTarget(i))
                             {
                                 DrawGizmosLine(((GameEventListenerCore)gl).transform.position);

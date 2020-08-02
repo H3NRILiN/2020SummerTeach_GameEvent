@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace ISU.Example
 {
@@ -47,6 +47,16 @@ namespace ISU.Example
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
+
+        public void ResetGame()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

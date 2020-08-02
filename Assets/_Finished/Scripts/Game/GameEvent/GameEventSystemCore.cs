@@ -17,7 +17,7 @@ public abstract class GameEventCore : ScriptableObject
         m_Listeners.Remove(listener);
     }
 
-    public void DoInvoke()
+    public void Raise()
     {
         for (int i = 0; i < m_Listeners.Count; i++)
         {

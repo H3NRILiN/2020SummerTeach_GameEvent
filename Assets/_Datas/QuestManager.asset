@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e72adb34d29a0df439cd2bd9a9d98243, type: 3}
   m_Name: QuestManager
   m_EditorClassIdentifier: 
+  m_TrackingQuestMax: {fileID: 11400000, guid: c966bd524dc7ff444ba758fb924560f8, type: 2}
+  m_TrackingQuests: {fileID: 11400000, guid: 8e055726f5b428748955913fc8295bc9, type: 2}
+  m_OnQuestAccept: {fileID: 11400000, guid: 84dbd04b634b09641a1d3229e8c31cef, type: 2}
