@@ -9,5 +9,6 @@ public class ItemObject : ScriptableObject
 
     [TextArea] public string m_Discription;
 
+    public Color m_DisplayColor = Color.white;
     public int GetID() => this.GetInstanceID();
 }

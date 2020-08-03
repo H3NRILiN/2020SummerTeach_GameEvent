@@ -79,7 +79,6 @@ namespace ISU.Example
         void Jump()
         {
             m_DesiredMovement.y = Mathf.Sqrt(2 * -Physics.gravity.y * m_Config.m_JumpHeight);
-            m_Config.m_AchievementManager.AddCount("A_Jump");
             m_Config.m_OnJumpEvent.Raise();
         }
 

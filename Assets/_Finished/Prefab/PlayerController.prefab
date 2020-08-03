@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8958179011216052594}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -87,6 +87,7 @@ MonoBehaviour:
   m_InteractDistance: 4
   m_OnInteract: {fileID: 11400000, guid: f8addb38e29423f4a8b694a035abcf4c, type: 2}
   m_OnPickup: {fileID: 11400000, guid: 79f150a3b81be8a44bca0fc793866798, type: 2}
+  m_Debug: 0
 --- !u!1 &8958179011718862788
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5407dc09fbacb6448b2acef55270663, type: 3}
   m_Name: TrackingQuests
   m_EditorClassIdentifier: 
-  staticValue: []
-  useStaticValue: 0
+  initialValue: []

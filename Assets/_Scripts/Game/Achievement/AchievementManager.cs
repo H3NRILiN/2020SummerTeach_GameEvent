@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "_Finished/AchievementManager")]
-public class AchievementManager : ScriptableObject
-{
-    List<Achievement> m_Achievements;
-    [SerializeField] bool m_Debug;
 
-    private void OnEnable()
+public class AchievementManager : MonoBehaviour
+{
+    [SerializeField] AchievementManagerVariable m_Variable;
+    List<Achievement> m_Achievements;
+    [SerializeField] bool m_DebugMode;
+
+    private void Awake()
     {
+        m_Variable.value = this;
         m_Achievements = new List<Achievement>();
     }
 
@@ -16,7 +18,7 @@ public class AchievementManager : ScriptableObject
     {
         if (!m_Achievements.Contains(ach))
         {
-            if (m_Debug) Debug.Log($"註冊成就 :{ach.name}");
+            if (m_DebugMode) Debug.Log($"註冊成就 :{ach.name}");
             m_Achievements.Add(ach);
         }
     }
@@ -60,6 +62,11 @@ public class AchievementManager : ScriptableObject
     void AchievementComplete(Achievement achievement, AchievementStage stage)
     {
         if (!stage.isCompleted)
-            Debug.Log($"成就: {stage.name}完成");
+            if (m_DebugMode) Debug.Log($"成就: {stage.name}完成");
+    }
+
+    public void AddCountByEvent(IntItemPairVariable itemWhithCount)
+    {
+        AddCount(itemWhithCount.value.itemValue, itemWhithCount.value.intValue);
     }
 }

@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e511d39d6880244d8a559fb7ba74705, type: 3}
-  m_Name: AchievementManager
+  m_Script: {fileID: 11500000, guid: e643ad5d23ce9ab4290fbe202447364f, type: 3}
+  m_Name: PickupItem
   m_EditorClassIdentifier: 
+  initialValue:
+    intValue: 0
+    itemValue: {fileID: 0}

@@ -8,8 +8,10 @@ namespace ISU.Example
     [RequireComponent(typeof(Interactable))]
     public class Pickupable : SubInteractor
     {
-        [SerializeField] QuestManager m_QuestManger;
-        [SerializeField] AchievementManager m_AchievementManager;
+        // [SerializeField] QuestManager m_QuestManger;
+        // [SerializeField] AchievementManager m_AchievementManager;
+        [SerializeField] IntItemPairVariable m_ItemVariable;
+        [SerializeField] GameEvent m_OnPickup;
         public ItemObject m_Item;
         public int m_ItemCount = 1;
 
@@ -27,11 +29,17 @@ namespace ISU.Example
 
         public override void OnInteract()
         {
-            m_AchievementManager.AddCount("A_Pickup");
+            // m_AchievementManager.AddCount("A_Pickup");
             if (m_Item)
             {
-                m_AchievementManager.AddCount(m_Item, m_ItemCount);
-                m_QuestManger.AddCount(m_Item, m_ItemCount);
+                m_ItemVariable.value.intValue = m_ItemCount;
+                m_ItemVariable.value.itemValue = m_Item;
+
+                m_OnPickup.Raise();
+
+                m_ItemVariable.value = new IntItemPair();
+                // m_AchievementManager.AddCount(m_Item, m_ItemCount);
+                // m_QuestManger.AddCount(m_Item, m_ItemCount);
             }
             Destroy(gameObject);
         }

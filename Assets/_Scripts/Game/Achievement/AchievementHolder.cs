@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 public class AchievementHolder : MonoBehaviour
 {
-    [SerializeField] AchievementManager m_AchievementManager;
+    [SerializeField] AchievementManagerVariable m_AchievementManager;
     [SerializeField] Achievement[] m_Achievements;
     private void Start()
     {
@@ -20,7 +20,7 @@ public class AchievementHolder : MonoBehaviour
 
     public void RegisterAchievementAt(int index)
     {
-        m_AchievementManager.RegisterQuest(m_Achievements[index]);
+        m_AchievementManager.value.RegisterQuest(m_Achievements[index]);
     }
 
     public void RegisterAllAchievement()

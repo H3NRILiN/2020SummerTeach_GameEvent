@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 public class QuestHolder : MonoBehaviour
 {
-    [SerializeField] QuestManager m_QuestManger;
+    [SerializeField] QuestManagerVariable m_QuestManger;
     public static Action<Quest[]> m_OnQuestPanelOpen;
     [SerializeField] Quest[] m_Quests;
+    private void Start()
+    {
 
+    }
     public void OpenMissionMenu()
     {
         if (m_OnQuestPanelOpen != null)
@@ -15,7 +18,7 @@ public class QuestHolder : MonoBehaviour
     }
     public void RegisterQuestAt(int index)
     {
-        m_QuestManger.RegisterQuest(m_Quests[index]);
+        m_QuestManger.value.RegisterQuest(m_Quests[index]);
     }
 
 }

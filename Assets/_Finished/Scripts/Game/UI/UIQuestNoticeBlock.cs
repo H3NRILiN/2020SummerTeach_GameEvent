@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class UIQuestNoticeBlock : MonoBehaviour
 {
+    [SerializeField] CanvasGroup m_CanvasGroup;
     [SerializeField] Text m_NameText;
     [SerializeField] Text m_CountText;
     public string m_CurrentQuestIDName;
+
     public void Notice(Quest quest)
     {
         m_CurrentQuestIDName = quest.IDName;
@@ -17,6 +19,13 @@ public class UIQuestNoticeBlock : MonoBehaviour
     }
     public void UpdateInfo(Quest quest)
     {
+        if (quest == null)
+        {
+            m_CanvasGroup.alpha = 0;
+            return;
+        }
+        m_CanvasGroup.alpha = 1;
+
         m_NameText.text = quest.name;
         m_CountText.text = $"({quest.currentCount}/{quest.goal.goalCount})";
     }

@@ -106,12 +106,12 @@ namespace ISU.Example
         private void Interact()
         {
             m_CurrentFocusing.OnInteract();
-            m_OnInteract.Raise();
-            if (m_CurrentFocusing.m_SubInteractor
-            && m_CurrentFocusing.m_SubInteractor.GetType() == typeof(Pickupable))
-            {
-                m_OnPickup.Raise();
-            }
+            //m_OnInteract.Raise();
+            // if (m_CurrentFocusing.m_SubInteractor
+            // && m_CurrentFocusing.m_SubInteractor.GetType() == typeof(Pickupable))
+            // {
+            //     m_OnPickup.Raise();
+            // }
         }
     }
 }

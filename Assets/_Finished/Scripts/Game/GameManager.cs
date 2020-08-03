@@ -8,7 +8,6 @@ namespace ISU.Example
     public class GameManager : MonoBehaviour
     {
         [SerializeField] PlayerController m_PlayerPrefab;
-
         static PlayerController m_Player;
         private void Awake()
         {

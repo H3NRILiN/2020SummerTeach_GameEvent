@@ -14,6 +14,5 @@ namespace ISU.Example
         public float m_JumpHeight;
 
         public GameEvent m_OnJumpEvent;
-        public AchievementManager m_AchievementManager;
     }
 }

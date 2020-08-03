@@ -7,9 +7,11 @@ namespace ISU.Example
 {
     [RequireComponent(typeof(Collider))]
     [SelectionBase]
-    public class Interactable : MonoBehaviour
+    public class Interactable : MonoBehaviour, ISerializationCallbackReceiver
     {
         [SerializeField] InteractionManager m_InteractionManager;
+        [SerializeField] GameEvent m_OnInteract;
+        [SerializeField] bool m_UseItemData;
         public string m_ObjectName;
         //顏色 (用於字等等的)
         public Color m_TextColor = Color.white;
@@ -43,6 +45,7 @@ namespace ISU.Example
 
             //觸發事件
             m_Event.Invoke();
+            m_OnInteract.Raise();
 
             if (m_SubInteractor != null)
             {
@@ -70,15 +73,15 @@ namespace ISU.Example
                     {
                         DrawGizmosLine(((Component)m_Event.GetPersistentTarget(i)).transform.position);
                     }
-                    else if (m_Event.GetPersistentTarget(i) && m_Event.GetPersistentTarget(i) is GameEventCore)
+                    else if (m_Event.GetPersistentTarget(i) && m_Event.GetPersistentTarget(i) is GameEvent)
                     {
                         //尋找所有GameEventListener
-                        foreach (var gl in Resources.FindObjectsOfTypeAll(typeof(GameEventListenerCore)))
+                        foreach (var gl in Resources.FindObjectsOfTypeAll(typeof(GameEventListener)))
                         {
                             //如果是這個Event
-                            if (((GameEventListenerCore)gl).m_Event == (GameEventCore)m_Event.GetPersistentTarget(i))
+                            if (((GameEventListener)gl).m_Event == (GameEvent)m_Event.GetPersistentTarget(i))
                             {
-                                DrawGizmosLine(((GameEventListenerCore)gl).transform.position);
+                                DrawGizmosLine(((GameEventListener)gl).transform.position);
                             }
                         }
                     }
@@ -91,6 +94,24 @@ namespace ISU.Example
             Gizmos.color = Color.green;
             Gizmos.DrawLine(transform.position, pos);
             Gizmos.DrawSphere(pos, .05f);
+        }
+
+        public void OnBeforeSerialize()
+        {
+
+        }
+
+        public void OnAfterDeserialize()
+        {
+            if (m_SubInteractor
+            && m_SubInteractor is Pickupable
+            && ((Pickupable)m_SubInteractor).m_Item
+            && m_UseItemData)
+            {
+                var pickupable = m_SubInteractor as Pickupable;
+                m_ObjectName = pickupable.m_Item.m_ItemName;
+                m_TextColor = pickupable.m_Item.m_DisplayColor;
+            }
         }
     }
 }

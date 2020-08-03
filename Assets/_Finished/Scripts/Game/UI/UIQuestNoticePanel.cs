@@ -57,6 +57,11 @@ public class UIQuestNoticePanel : MonoBehaviour
     }
     #endregion
 
+    private void Start()
+    {
+        UpdateUI();
+    }
+
     /// <summary>
     /// SizeFitter與GroupLayout開關
     /// </summary>
@@ -70,10 +75,17 @@ public class UIQuestNoticePanel : MonoBehaviour
 
     public void UpdateUI()
     {
-        for (int i = 0; i < m_TrackingQuests.value.Count; i++)
+        foreach (var item in m_TrackingQuests.value)
         {
-            if (m_TrackingQuests.value[i] == null)
+            Debug.Log($"{item.name} : {item.currentCount}");
+        }
+        for (int i = 0; i < m_NoticeBlocks.Length; i++)
+        {
+            if (i >= m_TrackingQuests.value.Count || m_TrackingQuests.value[i] == null)
+            {
+                m_NoticeBlocks[i].UpdateInfo(null);
                 continue;
+            }
             if (!m_NoticeBlocks[i].m_CurrentQuestIDName.Equals(m_TrackingQuests.value[i].IDName))
             {
                 m_NoticeBlocks[i].Notice(m_TrackingQuests.value[i]);

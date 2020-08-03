@@ -2127,6 +2127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 11400000, guid: f0a106ae0ad8bd445b296cf0245f11b4,
     type: 2}
+  m_OnInteract: {fileID: 11400000, guid: f8addb38e29423f4a8b694a035abcf4c, type: 2}
   m_ObjectName: "\u958B\u95DC"
   m_TextColor: {r: 0.7976914, g: 1, b: 0.3726415, a: 1}
   m_UseKeyPress: 1

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 316b7fa4567a9164cae58e9ad31a4c8d, type: 3}
-  m_Name: TrackingQuestMax
+  m_Script: {fileID: 11500000, guid: 742fd05224830324499237d393aa49ed, type: 3}
+  m_Name: Quest Manager
   m_EditorClassIdentifier: 
-  initialValue: 6
+  initialValue: {fileID: 0}

@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 3576922772910626721}
   - component: {fileID: 2929727174383290684}
   - component: {fileID: 4857990704503556278}
+  - component: {fileID: 2948200534197241020}
   m_Layer: 5
   m_Name: QuestNoticeBlock
   m_TagString: Untagged
@@ -248,9 +249,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0dd751e78d246348b5206a8e8f05856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_CanvasGroup: {fileID: 2948200534197241020}
   m_NameText: {fileID: 1630902832360034901}
   m_CountText: {fileID: 7623824032298193509}
   m_CurrentQuestIDName: 
+--- !u!225 &2948200534197241020
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8317012798800770696}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &9072023265982584685
 GameObject:
   m_ObjectHideFlags: 0

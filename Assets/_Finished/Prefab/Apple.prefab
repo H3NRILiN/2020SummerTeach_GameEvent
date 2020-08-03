@@ -109,8 +109,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 11400000, guid: f0a106ae0ad8bd445b296cf0245f11b4,
     type: 2}
-  m_ObjectName: "\u6389\u843D\u7269"
-  m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+  m_OnInteract: {fileID: 11400000, guid: f8addb38e29423f4a8b694a035abcf4c, type: 2}
+  m_UseItemData: 1
+  m_ObjectName: "\u860B\u679C"
+  m_TextColor: {r: 1, g: 0.4009434, b: 0.4009434, a: 1}
   m_UseKeyPress: 1
   m_Event:
     m_PersistentCalls:
@@ -128,8 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa65216fe29ecab42a9c0f4218362852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_QuestManger: {fileID: 11400000, guid: 33757b29346997940adad82c1f4ff5d3, type: 2}
-  m_AchievementManager: {fileID: 11400000, guid: c88defb632696ee47b6ba1988e3e6e0c,
-    type: 2}
+  m_ItemVariable: {fileID: 11400000, guid: 00908c936c4c2e14fae1d4685e9c2a51, type: 2}
+  m_OnPickup: {fileID: 11400000, guid: 79f150a3b81be8a44bca0fc793866798, type: 2}
   m_Item: {fileID: 11400000, guid: 8f6697cd2ee62e94c9ccb04cdb8a9463, type: 2}
   m_ItemCount: 1

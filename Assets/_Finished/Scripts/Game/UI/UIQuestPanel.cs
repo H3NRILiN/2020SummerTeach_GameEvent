@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace ISU.Example
 {
     public class UIQuestPanel : MonoBehaviour
     {
-        [SerializeField] QuestManager m_QuestManger;
+        [SerializeField] QuestManagerVariable m_QuestManger;
         [SerializeField] GameObject m_Panel;
         [SerializeField] RectTransform m_MissionBoardContainer;
         [SerializeField] VerticalLayoutGroup m_ContainerLayout;
@@ -48,14 +49,16 @@ namespace ISU.Example
             GameManager.FPSCursorLock(false);
             m_Panel.SetActive(true);
 
-            WaitForSeconds buildDelay = new WaitForSeconds(0.05f);
+            float fadeDuration = 0.1f;
+            WaitForSeconds buildDelay = new WaitForSeconds(fadeDuration);
 
             for (int i = 0; i < quests.Length; i++)
             {
-                yield return buildDelay;
+
                 Quest curQuest = quests[i];
                 var board = Instantiate(m_MissionBoardPrefab, m_MissionBoardContainer);
-                board.SetInfos(curQuest, () => Accept(curQuest, board));
+                board.SetInfos(curQuest, () => Accept(curQuest, board), fadeDuration);
+                yield return buildDelay;
             }
             yield return null;
             AutoLayout(false);
@@ -76,7 +79,7 @@ namespace ISU.Example
         }
         public void Accept(Quest quest, UIQuestBoard board)
         {
-            m_QuestManger.RegisterQuest(quest);
+            m_QuestManger.value.RegisterQuest(quest);
             board.OnQuestActive();
         }
     }
