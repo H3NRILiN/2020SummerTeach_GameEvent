@@ -42,16 +42,23 @@ public class Achievement : ISerializationCallbackReceiver
     public void OnBeforeSerialize()
     {
 
-        achievementIDName = Helper.EngNameRegex.Replace(achievementIDName, "");
+        if (achievementIDName != null)
+            achievementIDName = Helper.EngNameRegex.Replace(achievementIDName, "");
 
-        foreach (var stage in stages)
-        {
-            stage.name = Helper.TitleRegex.Replace(stage.namePattern, name);
-            stage.name = Helper.CountRegex.Replace(stage.name, stage.goalCount.ToString());
-
-            stage.description = Helper.TitleRegex.Replace(stage.descriptionPattern, name);
-            stage.description = Helper.CountRegex.Replace(stage.description, stage.goalCount.ToString());
-        }
+        if (stages != null)
+            foreach (var stage in stages)
+            {
+                if (stage.name != null)
+                {
+                    stage.name = Helper.TitleRegex.Replace(stage.namePattern, name);
+                    stage.name = Helper.CountRegex.Replace(stage.name, stage.goalCount.ToString());
+                }
+                if (stage.description != null)
+                {
+                    stage.description = Helper.TitleRegex.Replace(stage.descriptionPattern, name);
+                    stage.description = Helper.CountRegex.Replace(stage.description, stage.goalCount.ToString());
+                }
+            }
     }
 
     public void OnAfterDeserialize()

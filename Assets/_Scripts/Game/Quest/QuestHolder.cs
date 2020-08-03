@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using ISU.Example;
 using UnityEngine;
 public class QuestHolder : MonoBehaviour
 {
-    [SerializeField] QuestManagerVariable m_QuestManger;
+    [SerializeField] GameEvent m_OnQuestRegister;
+    [SerializeField] QuestVariable m_RegisteredQuest;
     public static Action<Quest[]> m_OnQuestPanelOpen;
     [SerializeField] Quest[] m_Quests;
     private void Start()
@@ -18,7 +20,8 @@ public class QuestHolder : MonoBehaviour
     }
     public void RegisterQuestAt(int index)
     {
-        m_QuestManger.value.RegisterQuest(m_Quests[index]);
+        m_RegisteredQuest.value = m_Quests[index];
+        m_OnQuestRegister.Raise();
     }
 
 }

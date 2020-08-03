@@ -6,18 +6,21 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    [SerializeField] QuestManagerVariable m_Variable;
+    [Tooltip("在UI上最多顯示多少Quest")]
     [SerializeField] IntVariable m_TrackingQuestMax;
+    [Tooltip("在UI上顯示的Quests")]
     [SerializeField] ListQuestVariable m_TrackingQuests;
-    [SerializeField] GameEvent m_OnQuestAccept;
-    [SerializeField] GameEvent m_OnAfterItemAdded;
+    [Tooltip("Quest接受時觸發的事件")]
+    [SerializeField] GameEvent m_OnQuestAdd;
+    [Tooltip("Item被加入後觸發的事件")]
+    [SerializeField] GameEvent m_OnItemAdd;
     Dictionary<ItemObject, List<Quest>> m_ItemMatchedQuests;
     Dictionary<string, Quest> m_NameMatchedQuests;
+    [Tooltip("Debug模式")]
     [SerializeField] bool m_DebugMode;
 
     private void Awake()
     {
-        m_Variable.value = this;
         m_TrackingQuests.value = new List<Quest>();
         m_ItemMatchedQuests = new Dictionary<ItemObject, List<Quest>>();
         m_NameMatchedQuests = new Dictionary<string, Quest>();
@@ -61,10 +64,16 @@ public class QuestManager : MonoBehaviour
 
             if (m_DebugMode) Debug.Log($"tQuestC: {m_TrackingQuests.value.Count } | tQuestM: {m_TrackingQuestMax.value}");
 
-            m_OnQuestAccept.Raise();
+            m_OnQuestAdd.Raise();
             m_NameMatchedQuests.Add(quest.name, quest);
             quest.active = true;
         }
+    }
+
+    public void RegisterQuestByEvent(QuestVariable addedQuest)
+    {
+        RegisterQuest(addedQuest.value);
+        addedQuest.value = new Quest();
     }
 
     /// <summary>
@@ -86,7 +95,6 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
-
     /// <summary>
     /// 增加Quest的計量，依Item尋找Quest，增加1
     /// </summary>
@@ -95,7 +103,6 @@ public class QuestManager : MonoBehaviour
     {
         AddCount(item, 1);
     }
-
     /// <summary>
     ///  增加Quest的計量，依IDName尋找Quest，增加amount
     /// </summary>
@@ -120,6 +127,6 @@ public class QuestManager : MonoBehaviour
     public void AddCountByEvent(IntItemPairVariable itemWhithCount)
     {
         AddCount(itemWhithCount.value.itemValue, itemWhithCount.value.intValue);
-        m_OnAfterItemAdded.Raise();
+        m_OnItemAdd.Raise();
     }
 }

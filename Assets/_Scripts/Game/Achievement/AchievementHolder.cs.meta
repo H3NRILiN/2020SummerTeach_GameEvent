@@ -4,7 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - m_AchievementManager: {fileID: 11400000, guid: c88defb632696ee47b6ba1988e3e6e0c,
+  - m_OnAchievementRegister: {fileID: 11400000, guid: 5bcb1fd15e2f95b419f205a0697d3389,
+      type: 2}
+  - m_RegisteredAchivement: {fileID: 11400000, guid: 6122a03d87985664f8772662bd27ed3f,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

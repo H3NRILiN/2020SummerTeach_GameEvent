@@ -10,8 +10,9 @@ namespace ISU.Example
     {
         // [SerializeField] QuestManager m_QuestManger;
         // [SerializeField] AchievementManager m_AchievementManager;
-        [SerializeField] IntItemPairVariable m_ItemVariable;
         [SerializeField] GameEvent m_OnPickup;
+        [SerializeField] IntItemPairVariable m_ItemVariable;
+
         public ItemObject m_Item;
         public int m_ItemCount = 1;
 

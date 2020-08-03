@@ -4,7 +4,10 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - m_QuestContainer: {fileID: 11400000, guid: 33757b29346997940adad82c1f4ff5d3, type: 2}
+  - m_OnQuestRegister: {fileID: 11400000, guid: 2a5107637cea28d45a84e1d60b378272,
+      type: 2}
+  - m_RegisteredQuest: {fileID: 11400000, guid: 94e0de4a6e477bf4daa03bb6deda44a0,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

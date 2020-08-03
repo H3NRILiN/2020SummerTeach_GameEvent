@@ -36,19 +36,24 @@ public class Quest : ISerializationCallbackReceiver
 
     public void OnBeforeSerialize()
     {
-        if (IDName.Length > 0)
+        if (IDName != null && IDName.Length > 0)
         {
             IDName = Helper.EngNameRegex.Replace(IDName, "");
         }
 
         var requiredItemName = "";
-        if (goal.requiredItem)
+        if (goal != null && goal.requiredItem)
             requiredItemName = goal.requiredItem.m_ItemName;
-        name = Helper.ItemNameRegex.Replace(namePattern, requiredItemName);
-        description = Helper.ItemNameRegex.Replace(descriptionPattern, requiredItemName);
+        if (name != null)
+        {
+            name = Helper.ItemNameRegex.Replace(namePattern, requiredItemName);
+            name = Helper.CountRegex.Replace(name, goal.goalCount.ToString());
+        }
 
-        name = Helper.CountRegex.Replace(name, goal.goalCount.ToString());
-        description = Helper.CountRegex.Replace(description, goal.goalCount.ToString());
-
+        if (description != null)
+        {
+            description = Helper.CountRegex.Replace(description, goal.goalCount.ToString());
+            description = Helper.ItemNameRegex.Replace(descriptionPattern, requiredItemName);
+        }
     }
 }

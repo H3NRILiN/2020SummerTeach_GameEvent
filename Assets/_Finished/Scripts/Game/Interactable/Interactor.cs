@@ -10,11 +10,6 @@ namespace ISU.Example
         [SerializeField] InteractionManager m_InteractionManager;
         [SerializeField] LayerMask m_LayerMask;
         [SerializeField] float m_InteractDistance;
-
-
-        [SerializeField] GameEvent m_OnInteract;
-        [SerializeField] GameEvent m_OnPickup;
-
         UIInteractionPanel m_NoticeUI;
         Camera m_Camera;
 

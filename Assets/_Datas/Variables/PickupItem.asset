@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PickupItem
   m_EditorClassIdentifier: 
   initialValue:
-    intValue: 0
-    itemValue: {fileID: 0}
+    intValue: 1
+    itemValue: {fileID: 11400000, guid: 8f6697cd2ee62e94c9ccb04cdb8a9463, type: 2}

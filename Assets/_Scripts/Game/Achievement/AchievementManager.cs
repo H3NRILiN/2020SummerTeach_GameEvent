@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
 {
-    [SerializeField] AchievementManagerVariable m_Variable;
     List<Achievement> m_Achievements;
     [SerializeField] bool m_DebugMode;
 
     private void Awake()
     {
-        m_Variable.value = this;
         m_Achievements = new List<Achievement>();
     }
 
-    public void RegisterQuest(Achievement ach)
+    public void RegisterAchievement(Achievement ach)
     {
         if (!m_Achievements.Contains(ach))
         {
             if (m_DebugMode) Debug.Log($"註冊成就 :{ach.name}");
             m_Achievements.Add(ach);
         }
+    }
+
+    public void RegisterAchievementByEvent(AchievementVariable regesteredAchivement)
+    {
+        RegisterAchievement(regesteredAchivement.value);
     }
 
     public void AddCount(ItemObject item, int amount)

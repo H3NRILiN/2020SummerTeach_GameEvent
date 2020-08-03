@@ -8,12 +8,13 @@ namespace ISU.Example
 {
     public class UIQuestPanel : MonoBehaviour
     {
-        [SerializeField] QuestManagerVariable m_QuestManger;
         [SerializeField] GameObject m_Panel;
         [SerializeField] RectTransform m_MissionBoardContainer;
         [SerializeField] VerticalLayoutGroup m_ContainerLayout;
         [SerializeField] ContentSizeFitter m_ContainerSizeFittter;
         [SerializeField] UIQuestBoard m_MissionBoardPrefab;
+        [SerializeField] GameEvent m_OnQuestAccept;
+        [SerializeField] QuestVariable m_AcceptedQuest;
 
         IEnumerator CurrentBuildPanelCoroutine;
         private void Start()
@@ -54,7 +55,6 @@ namespace ISU.Example
 
             for (int i = 0; i < quests.Length; i++)
             {
-
                 Quest curQuest = quests[i];
                 var board = Instantiate(m_MissionBoardPrefab, m_MissionBoardContainer);
                 board.SetInfos(curQuest, () => Accept(curQuest, board), fadeDuration);
@@ -79,7 +79,8 @@ namespace ISU.Example
         }
         public void Accept(Quest quest, UIQuestBoard board)
         {
-            m_QuestManger.value.RegisterQuest(quest);
+            m_AcceptedQuest.value = quest;
+            m_OnQuestAccept.Raise();
             board.OnQuestActive();
         }
     }
