@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Variable/Float")]
-public class FloatVariable : VariableCore<float>
+namespace ISU.Example
 {
+    [CreateAssetMenu(menuName = "_Finished/Variable/Float")]
+    public class FloatVariable : VariableCore<float>
+    {
 
+    }
 }

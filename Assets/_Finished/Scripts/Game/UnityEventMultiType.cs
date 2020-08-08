@@ -1,7 +1,11 @@
 ﻿using System;
+using ISU.Example.Inventory;
 using UnityEngine.Events;
 
-[Serializable]
-public class UnityEvent_Item : UnityEvent<ItemObject>
+namespace ISU.Test.Events
 {
+    [Serializable]
+    public class UnityEvent_Item : UnityEvent<ItemObject>
+    {
+    }
 }

@@ -4,95 +4,98 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-public class UIQuestNoticePanel : MonoBehaviour
+namespace ISU.Example
 {
-    [SerializeField] ListQuestVariable m_TrackingQuests;
-    [SerializeField] UIQuestNoticeBlock[] m_NoticeBlocks;
-
-    #region Edtior用
-
-    [SerializeField] RectTransform m_NoticeListContainer;
-    [SerializeField] UIQuestNoticeBlock m_NoticeBlockPrefab;
-    [SerializeField] IntVariable m_NoticeBlockCount;
-    [SerializeField] ContentSizeFitter m_SizeFitter;
-    [SerializeField] VerticalLayoutGroup m_LayoutGroup;
-
-    [ContextMenu("生成Blocks")]
-    private void SetBlocks()
+    public class UIQuestNoticePanel : MonoBehaviour
     {
-        StartCoroutine(SetBloacksRoutine());
-    }
+        [SerializeField] ListQuestVariable m_TrackingQuests;
+        [SerializeField] UIQuestNoticeBlock[] m_NoticeBlocks;
 
-    /// <summary>
-    /// 生成Block的Coroutine
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator SetBloacksRoutine()
-    {
-        //摧毀所有底下的物件
-        foreach (var item in m_NoticeListContainer.GetComponentsInChildren<Transform>())
+        #region Edtior用
+
+        [SerializeField] RectTransform m_NoticeListContainer;
+        [SerializeField] UIQuestNoticeBlock m_NoticeBlockPrefab;
+        [SerializeField] IntVariable m_NoticeBlockCount;
+        [SerializeField] ContentSizeFitter m_SizeFitter;
+        [SerializeField] VerticalLayoutGroup m_LayoutGroup;
+
+        [ContextMenu("生成Blocks")]
+        private void SetBlocks()
         {
-            if (item == m_NoticeListContainer || item == null)
-                continue;
-            DestroyImmediate(item.gameObject);
+            StartCoroutine(SetBloacksRoutine());
         }
-        ActiveLayout(true);
-        yield return null;
-        //建立List，實例化物件
-        if (m_NoticeListContainer && m_NoticeBlockPrefab)
+
+        /// <summary>
+        /// 生成Block的Coroutine
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator SetBloacksRoutine()
         {
-            m_NoticeBlocks = new UIQuestNoticeBlock[m_NoticeBlockCount.value];
-            for (int i = 0; i < m_NoticeBlockCount.value; i++)
+            //摧毀所有底下的物件
+            foreach (var item in m_NoticeListContainer.GetComponentsInChildren<Transform>())
             {
-                //實例化，命名
-                m_NoticeBlocks[i] = Instantiate(m_NoticeBlockPrefab, m_NoticeListContainer);
-                m_NoticeBlocks[i].name = $"Block {m_NoticeBlockCount.value - i}";
+                if (item == m_NoticeListContainer || item == null)
+                    continue;
+                DestroyImmediate(item.gameObject);
             }
-            //Linq依命名排序
-            m_NoticeBlocks = m_NoticeBlocks.OrderBy(x => x.name).ToArray();
+            ActiveLayout(true);
+            yield return null;
+            //建立List，實例化物件
+            if (m_NoticeListContainer && m_NoticeBlockPrefab)
+            {
+                m_NoticeBlocks = new UIQuestNoticeBlock[m_NoticeBlockCount.value];
+                for (int i = 0; i < m_NoticeBlockCount.value; i++)
+                {
+                    //實例化，命名
+                    m_NoticeBlocks[i] = Instantiate(m_NoticeBlockPrefab, m_NoticeListContainer);
+                    m_NoticeBlocks[i].name = $"Block {m_NoticeBlockCount.value - i}";
+                }
+                //Linq依命名排序
+                m_NoticeBlocks = m_NoticeBlocks.OrderBy(x => x.name).ToArray();
+            }
+            yield return null;
+
+            ActiveLayout(false);
         }
-        yield return null;
+        #endregion
 
-        ActiveLayout(false);
-    }
-    #endregion
-
-    private void Start()
-    {
-        UpdateUI();
-    }
-
-    /// <summary>
-    /// SizeFitter與GroupLayout開關
-    /// </summary>
-    /// <param name="on"></param>
-    void ActiveLayout(bool on)
-    {
-        m_SizeFitter.enabled = on;
-        m_LayoutGroup.enabled = on;
-    }
-
-
-    public void UpdateUI()
-    {
-        foreach (var item in m_TrackingQuests.value)
+        private void Start()
         {
-            Debug.Log($"{item.name} : {item.currentCount}");
+            UpdateUI();
         }
-        for (int i = 0; i < m_NoticeBlocks.Length; i++)
+
+        /// <summary>
+        /// SizeFitter與GroupLayout開關
+        /// </summary>
+        /// <param name="on"></param>
+        void ActiveLayout(bool on)
         {
-            if (i >= m_TrackingQuests.value.Count || m_TrackingQuests.value[i] == null)
+            m_SizeFitter.enabled = on;
+            m_LayoutGroup.enabled = on;
+        }
+
+
+        public void UpdateUI()
+        {
+            foreach (var item in m_TrackingQuests.value)
             {
-                m_NoticeBlocks[i].UpdateInfo(null);
-                continue;
+                Debug.Log($"{item.name} : {item.currentCount}");
             }
-            if (!m_NoticeBlocks[i].m_CurrentQuestIDName.Equals(m_TrackingQuests.value[i].IDName))
+            for (int i = 0; i < m_NoticeBlocks.Length; i++)
             {
-                m_NoticeBlocks[i].Notice(m_TrackingQuests.value[i]);
-            }
-            else
-            {
-                m_NoticeBlocks[i].UpdateInfo(m_TrackingQuests.value[i]);
+                if (i >= m_TrackingQuests.value.Count || m_TrackingQuests.value[i] == null)
+                {
+                    m_NoticeBlocks[i].UpdateInfo(null);
+                    continue;
+                }
+                if (!m_NoticeBlocks[i].m_CurrentQuestIDName.Equals(m_TrackingQuests.value[i].IDName))
+                {
+                    m_NoticeBlocks[i].Notice(m_TrackingQuests.value[i]);
+                }
+                else
+                {
+                    m_NoticeBlocks[i].UpdateInfo(m_TrackingQuests.value[i]);
+                }
             }
         }
     }

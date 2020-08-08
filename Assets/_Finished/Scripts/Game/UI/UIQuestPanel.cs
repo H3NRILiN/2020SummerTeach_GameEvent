@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using ISU.Common;
 
 namespace ISU.Example
 {
@@ -13,8 +14,7 @@ namespace ISU.Example
         [SerializeField] VerticalLayoutGroup m_ContainerLayout;
         [SerializeField] ContentSizeFitter m_ContainerSizeFittter;
         [SerializeField] UIQuestBoard m_MissionBoardPrefab;
-        [SerializeField] GameEvent m_OnQuestAccept;
-        [SerializeField] QuestVariable m_AcceptedQuest;
+        [SerializeField] GameEventQuestPair m_OnQuestAccept;
 
         IEnumerator CurrentBuildPanelCoroutine;
         private void Start()
@@ -31,13 +31,13 @@ namespace ISU.Example
         {
             QuestHolder.m_OnQuestPanelOpen -= PanelOpen;
         }
-        void PanelOpen(Quest[] quests)
+        void PanelOpen(QuestVariable[] quests)
         {
             CurrentBuildPanelCoroutine = BuildPanelContent(quests);
             StartCoroutine(CurrentBuildPanelCoroutine);
         }
 
-        IEnumerator BuildPanelContent(Quest[] quests)
+        IEnumerator BuildPanelContent(QuestVariable[] quests)
         {
             foreach (var existBoard in m_MissionBoardContainer.GetComponentsInChildren<UIQuestBoard>())
             {
@@ -55,7 +55,7 @@ namespace ISU.Example
 
             for (int i = 0; i < quests.Length; i++)
             {
-                Quest curQuest = quests[i];
+                Quest curQuest = quests[i].value;
                 var board = Instantiate(m_MissionBoardPrefab, m_MissionBoardContainer);
                 board.SetInfos(curQuest, () => Accept(curQuest, board), fadeDuration);
                 yield return buildDelay;
@@ -79,8 +79,7 @@ namespace ISU.Example
         }
         public void Accept(Quest quest, UIQuestBoard board)
         {
-            m_AcceptedQuest.value = quest;
-            m_OnQuestAccept.Raise();
+            m_OnQuestAccept.Raise(quest);
             board.OnQuestActive();
         }
     }

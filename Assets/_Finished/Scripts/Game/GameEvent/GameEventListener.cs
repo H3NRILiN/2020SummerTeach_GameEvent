@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ISU.Example
+namespace ISU.Example.Events
 {
+    [AddComponentMenu("ISU/Example/GameEventListener")]
     public class GameEventListener : MonoBehaviour
     {
         public GameEvent m_Event;

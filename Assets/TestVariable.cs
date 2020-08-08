@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestVariable : MonoBehaviour
+namespace ISU.Example
 {
-    [SerializeField] ListQuestVariable m_Q;
-    private void Update()
+    public class TestVariable : MonoBehaviour
     {
-        Debug.Log(m_Q.value.Count);
-        foreach (var item in m_Q.value)
+        [SerializeField] ListQuestVariable m_Q;
+        private void Update()
         {
-            Debug.Log(item.name);
+            Debug.Log(m_Q.value.Count);
+            foreach (var item in m_Q.value)
+            {
+                Debug.Log(item.name);
+            }
         }
     }
 }

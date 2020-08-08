@@ -130,7 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa65216fe29ecab42a9c0f4218362852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OnPickup: {fileID: 11400000, guid: 79f150a3b81be8a44bca0fc793866798, type: 2}
-  m_ItemVariable: {fileID: 11400000, guid: 00908c936c4c2e14fae1d4685e9c2a51, type: 2}
+  m_OnItemPickup:
+    gameEvent: {fileID: 11400000, guid: 79f150a3b81be8a44bca0fc793866798, type: 2}
+    intItem: {fileID: 11400000, guid: 00908c936c4c2e14fae1d4685e9c2a51, type: 2}
   m_Item: {fileID: 0}
   m_ItemCount: 1

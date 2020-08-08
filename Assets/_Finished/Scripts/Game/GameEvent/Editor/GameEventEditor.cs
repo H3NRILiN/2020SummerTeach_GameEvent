@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 
-namespace ISU.Example
+namespace ISU.Example.Events
 {
     [CustomEditor(typeof(GameEvent))]
     public class GameEventEditor : Editor

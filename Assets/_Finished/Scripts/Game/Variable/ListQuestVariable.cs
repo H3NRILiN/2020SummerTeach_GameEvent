@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Variable/ListQuest")]
-public class ListQuestVariable : ListVariableCore<Quest>
+namespace ISU.Example
 {
+    [CreateAssetMenu(menuName = "_Finished/Variable/ListQuest")]
+    public class ListQuestVariable : ListVariableCore<Quest>
+    {
+    }
 }

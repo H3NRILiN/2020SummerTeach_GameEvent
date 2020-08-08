@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Finished/Scenes/GameEventExample.unity
     guid: dc838297caa39824ca91a2f07b5aa9ea
+  - enabled: 1
+    path: Assets/_Lessons/1_Delegate/BaseExample_Finished/Scene/1_Delegate_Example1.unity
+    guid: 77309ca6412c1414ba1c3976680c11b8
+  - enabled: 1
+    path: Assets/_Lessons/1_Delegate/BaseExample_Finished/Scene/1_Delegate_Example1_Scene2.unity
+    guid: e61d426db55c4be489c864b0cf343dba
   m_configObjects: {}

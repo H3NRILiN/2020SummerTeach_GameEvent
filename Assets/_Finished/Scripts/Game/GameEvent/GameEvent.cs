@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace ISU.Example
+namespace ISU.Example.Events
 {
     [CreateAssetMenu(menuName = "_Finished/GameEvent/NewGameEvent")]
     public class GameEvent : ScriptableObject
