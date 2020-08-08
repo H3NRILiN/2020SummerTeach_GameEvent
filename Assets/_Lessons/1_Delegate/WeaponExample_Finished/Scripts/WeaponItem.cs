@@ -9,12 +9,13 @@
         [SerializeField] float m_Damage;
         public void OnAttack(Damagable target)
         {
+            Debug.Log($"使用武器 : <b>{m_WeaponName}</b>");
             if (!target)
             {
-                Debug.Log("揮空");
+                Debug.Log("<color=yellow>揮空</color>");
                 return;
             }
-            Debug.Log($"攻擊目標: {target.m_CharacterName}");
+            Debug.Log($"攻擊目標: <b>{target.m_CharacterName}</b>");
             target.TakeDamage(m_Damage);
         }
     }

@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEditor;
 
-namespace ISU.Common
+namespace ISU.Example
 {
     [CustomEditor(typeof(Interactable))]
     public class InteractableEditor : Editor

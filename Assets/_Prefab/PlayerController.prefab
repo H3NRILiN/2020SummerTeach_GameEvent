@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8958179011216060047}
   - component: {fileID: 8958179011216052592}
   - component: {fileID: 8958179011216052593}
-  - component: {fileID: 7381472237499935367}
   m_Layer: 2
   m_Name: PlayerController
   m_TagString: Untagged
@@ -67,25 +66,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Config: {fileID: 11400000, guid: 9bfa44d350feac443a3a8043e671bf89, type: 2}
   m_CanMove: 1
---- !u!114 &7381472237499935367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8958179011216052594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08cfc9e12f25bf44ab79e97cc7290fa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 11400000, guid: f0a106ae0ad8bd445b296cf0245f11b4,
-    type: 2}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_InteractDistance: 4
-  m_Debug: 0
 --- !u!1 &8958179011718862788
 GameObject:
   m_ObjectHideFlags: 0

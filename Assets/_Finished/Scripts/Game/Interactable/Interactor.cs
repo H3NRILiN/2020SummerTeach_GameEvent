@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ISU.Example;
 using UnityEngine;
 
-namespace ISU.Common
+namespace ISU.Example
 {
     public class Interactor : MonoBehaviour
     {

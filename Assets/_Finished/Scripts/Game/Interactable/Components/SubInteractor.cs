@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ISU.Common
+namespace ISU.Example
 {
     public abstract class SubInteractor : MonoBehaviour
     {

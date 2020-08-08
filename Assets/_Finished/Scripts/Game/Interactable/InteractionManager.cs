@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ISU.Common
+namespace ISU.Example
 {
     [CreateAssetMenu(menuName = "_Finished/InteractionManager")]
     public class InteractionManager : ScriptableObject

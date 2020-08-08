@@ -18,12 +18,12 @@ namespace ISU.Lesson.Delegate.BaseExample
         public void ResetGame()
         {
 
-            SceneManager.LoadScene("1_Delegate_Example1");
+            SceneManager.LoadScene("1_Delegate_BaseExample");
         }
 
         public void NextScene()
         {
-            SceneManager.LoadScene("1_Delegate_Example1_Scene2");
+            SceneManager.LoadScene("1_Delegate_BaseExample_Scene2");
         }
     }
 }

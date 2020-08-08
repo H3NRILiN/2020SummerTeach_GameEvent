@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using ISU.Example.Events;
 using ISU.Example.Inventory;
-using ISU.Example;
 
-namespace ISU.Common
+namespace ISU.Example
 {
     [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(Interactable))]

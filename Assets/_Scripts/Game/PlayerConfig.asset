@@ -18,5 +18,3 @@ MonoBehaviour:
   m_WalkSpeed: 4
   m_JumpHeight: 1
   m_OnJumpEvent: {fileID: 11400000, guid: 35d284d7b2982ee46a25fae8d8f2b6e6, type: 2}
-  m_AchievementManager: {fileID: 11400000, guid: c88defb632696ee47b6ba1988e3e6e0c,
-    type: 2}

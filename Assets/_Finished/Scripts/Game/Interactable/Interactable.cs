@@ -4,7 +4,7 @@ using ISU.Example.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ISU.Common
+namespace ISU.Example
 {
     [RequireComponent(typeof(Collider))]
     [SelectionBase]
