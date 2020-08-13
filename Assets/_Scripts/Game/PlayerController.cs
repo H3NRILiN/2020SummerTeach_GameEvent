@@ -8,7 +8,7 @@ namespace ISU.Common
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] PlayerConfig m_Config;
-        Camera m_Camera;
+        [SerializeField] Transform m_CameraPosition;
         CharacterController m_CharacterController;
         ControllerInput m_Input;
 
@@ -20,7 +20,6 @@ namespace ISU.Common
         void Start()
         {
             m_CharacterController = GetComponent<CharacterController>();
-            m_Camera = GetComponentInChildren<Camera>();
         }
 
 
@@ -87,9 +86,9 @@ namespace ISU.Common
             m_DesiredRotation.x += -m_Input.MouseY * m_Config.m_RotationXSpeed * Time.deltaTime;
             m_DesiredRotation.y += m_Input.MouseX * m_Config.m_RotationYSpeed * Time.deltaTime;
 
-            var camRot = m_Camera.transform.rotation.eulerAngles;
+            var camRot = m_CameraPosition.rotation.eulerAngles;
             camRot.x = Mathf.SmoothDampAngle(camRot.x, m_DesiredRotation.x, ref m_RoationDampVelocity.x, m_Config.m_DampTime);
-            m_Camera.transform.rotation = Quaternion.Euler(camRot);
+            m_CameraPosition.rotation = Quaternion.Euler(camRot);
 
             var characterRot = transform.rotation.eulerAngles;
             characterRot.y = Mathf.SmoothDampAngle(characterRot.y, m_DesiredRotation.y, ref m_RoationDampVelocity.y, m_Config.m_DampTime);

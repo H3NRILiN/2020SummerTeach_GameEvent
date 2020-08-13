@@ -9,8 +9,12 @@ namespace ISU.Common
     {
         [SerializeField] PlayerController m_PlayerPrefab;
         static PlayerController m_Player;
+
+        public static GameManager instence;
         private void Awake()
         {
+            instence = this;
+
             m_Player = FindObjectOfType<PlayerController>();
             if (!m_Player)
                 m_Player = Instantiate(m_Player);
@@ -32,7 +36,7 @@ namespace ISU.Common
 
         }
 
-        public static void FPSCursorLock(bool on)
+        public void FPSCursorLock(bool on)
         {
             if (on)
             {
