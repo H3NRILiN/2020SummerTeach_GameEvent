@@ -30,14 +30,5 @@
         {
             m_OnKeyPress?.Invoke();
         }
-
-        public void ToEmptyObject()
-        {
-            gameObject.name = " ";
-            Destroy(m_Button);
-            Destroy(m_Image);
-            Destroy(m_Text.gameObject);
-        }
-
     }
 }

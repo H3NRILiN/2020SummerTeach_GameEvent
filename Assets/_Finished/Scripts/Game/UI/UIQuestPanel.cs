@@ -47,7 +47,8 @@ namespace ISU.Example
             AutoLayout(true);
             yield return null;
 
-            GameManager.instence.FPSCursorLock(false);
+            GameState.m_PlayerCursorLock(false);
+            GameState.m_PlayerCanMove(false);
             m_Panel.SetActive(true);
 
             float fadeDuration = 0.1f;
@@ -74,7 +75,8 @@ namespace ISU.Example
         {
             if (CurrentBuildPanelCoroutine != null)
                 StopCoroutine(CurrentBuildPanelCoroutine);
-            GameManager.instence.FPSCursorLock(true);
+            GameState.m_PlayerCursorLock(true);
+            GameState.m_PlayerCanMove(true);
             m_Panel.SetActive(false);
         }
         public void Accept(Quest quest, UIQuestBoard board)

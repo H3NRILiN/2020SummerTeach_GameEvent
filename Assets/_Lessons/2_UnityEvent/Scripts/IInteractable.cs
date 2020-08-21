@@ -1,11 +1,13 @@
-﻿namespace ISU.Lesson.UNITYEvent
+﻿using System;
+
+namespace ISU.Lesson.UNITYEvent
 {
     public interface IInteractable
     {
-        CameraAnimationTarget m_CamAnimTarget { get; set; }
-
         void OnInteract();
 
         void OnExitInteraction();
+
+        Action OnExitInteractionEvent { get; set; }
     }
 }

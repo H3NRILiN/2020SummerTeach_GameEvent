@@ -4,14 +4,16 @@
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.Events;
 
     public class Interactor : MonoBehaviour
     {
         [SerializeField] Camera m_Cam;
 
         [SerializeField] LayerMask m_RayMask;
-        [SerializeField] CameraAnimation m_CameraAnimation;
+        [SerializeField] UnityEventInteractable m_OnInteract;
 
+        bool m_CanExit;
         bool m_Interacting;
         IInteractable m_CurrentInteracting;
         Transform m_LastInteracted;
@@ -23,24 +25,23 @@
         // Update is called once per frame
         void Update()
         {
-            m_CameraAnimation.ProcessCameraFollowing();
-
             ProcessInteraction();
 
-            if (m_Interacting)
-            {
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    m_CurrentInteracting.OnExitInteraction();
-
-                    m_Interacting = false;
-
-                    m_CurrentInteracting = null;
-                }
-            }
+            // if (m_Interacting)
+            // {
+            //     if (Input.GetKeyDown(KeyCode.Escape))
+            //     {
+            //         m_CurrentInteracting.OnExitInteraction();
+            //     }
+            // }
         }
 
+        private void ExitInteraction()
+        {
+            m_Interacting = false;
 
+            m_CurrentInteracting = null;
+        }
 
         void ProcessInteraction()
         {
@@ -57,13 +58,21 @@
 
                             m_CurrentInteracting.OnInteract();
 
-                            m_CameraAnimation.MoveToTarget(m_CurrentInteracting.m_CamAnimTarget);
+                            m_CurrentInteracting.OnExitInteractionEvent = ExitInteraction;
+
+                            m_OnInteract.Invoke(m_CurrentInteracting);
 
                             m_Interacting = true;
                         }
                     }
                 }
             }
+        }
+
+        [Serializable]
+        public class UnityEventInteractable : UnityEvent<IInteractable>
+        {
+
         }
     }
 }

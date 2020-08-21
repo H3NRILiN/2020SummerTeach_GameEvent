@@ -10,10 +10,11 @@ namespace ISU.Common
         [SerializeField] PlayerController m_PlayerPrefab;
         static PlayerController m_Player;
 
-        public static GameManager instence;
         private void Awake()
         {
-            instence = this;
+
+            GameState.m_PlayerCanMove = FPSPlayerCanMove;
+            GameState.m_PlayerCursorLock = FPSCursorLock;
 
             m_Player = FindObjectOfType<PlayerController>();
             if (!m_Player)
@@ -40,15 +41,25 @@ namespace ISU.Common
         {
             if (on)
             {
-                m_Player.m_CanMove = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
             else
             {
-                m_Player.m_CanMove = false;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+            }
+        }
+
+        public void FPSPlayerCanMove(bool on)
+        {
+            if (on)
+            {
+                m_Player.m_CanMove = true;
+            }
+            else
+            {
+                m_Player.m_CanMove = false;
             }
         }
 

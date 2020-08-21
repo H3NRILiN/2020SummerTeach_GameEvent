@@ -8,39 +8,53 @@
 
     public class CameraAnimation : MonoBehaviour
     {
-        [SerializeField] Camera m_Camera;
         [SerializeField] Vector3 m_CameraOffset;
         [SerializeField] Transform m_CameraFollowing;
-        [SerializeField] Interactor m_Interactor;
         [SerializeField] bool m_IsFollowing = true;
 
+        public CameraAnimationTarget m_BackBasicTarget;
+        public static CameraAnimation instance;
+
+        private void Awake()
+        {
+            if (instance != null)
+            {
+                Debug.LogError($"場上已經有一個CameraAnimation存在");
+            }
+            else
+            {
+                instance = this;
+            }
+        }
+
+        private void Update()
+        {
+            ProcessCameraFollowing();
+        }
 
         public void MoveToTarget(CameraAnimationTarget target)
         {
+            if (target == null)
+                return;
+
             m_IsFollowing = false;
-            Sequence sequence = DOTween.Sequence();
-            target.m_OnBegin.Invoke();
-            sequence.Insert(0, m_Camera.transform.DOMove(target.m_Position.position, target.m_Duration, false).SetDelay(target.m_WaitSeconds));
-            sequence.Insert(0, m_Camera.transform.DORotate(target.m_Position.rotation.eulerAngles, target.m_Duration).SetDelay(target.m_WaitSeconds));
-            sequence.OnComplete(() =>
-            {
-                target.m_OnEnd.Invoke();
-                if (target.m_NextTarget != null)
-                {
-                    MoveToTarget(target.m_NextTarget);
-                }
-            });
+
+            target.MoveTo();
         }
 
         public void ProcessCameraFollowing()
         {
             if (m_IsFollowing)
             {
-                m_Camera.transform.position = GetCameraFollowingPosition();
-                m_Camera.transform.rotation = m_CameraFollowing.rotation;
+                transform.position = GetCameraFollowingPosition();
+                transform.rotation = m_CameraFollowing.rotation;
             }
         }
 
         Vector3 GetCameraFollowingPosition() => m_CameraFollowing.position + m_CameraOffset;
+
+        public void SetFollowing(bool follow) => m_IsFollowing = follow;
+
+
     }
 }

@@ -17,25 +17,20 @@
 
         [SerializeField] CameraAnimationTarget camAnimTarget;
         public CameraAnimationTarget m_CamAnimTarget { get => camAnimTarget; set => camAnimTarget = value; }
+        public Action OnExitInteractionEvent { get; set; }
 
         int m_InputedNumbers;
         public void OnExitInteraction()
         {
             m_OnExit.Invoke();
-
+            OnExitInteractionEvent?.Invoke();
+            OnExitInteractionEvent = null;
         }
-
-        public void OnInteract()
-        {
-            m_OnInteract.Invoke();
-        }
-
+        public void OnInteract() => m_OnInteract.Invoke();
         public void OnUnlockCheck()
         {
             if (m_InputedNumbers == m_Password)
-            {
                 m_OnUnlock.Invoke();
-            }
         }
 
         private void Start()
@@ -48,14 +43,14 @@
             m_InputedNumbers = m_InputedNumbers * 10 + number;
             m_InputText.text = m_InputedNumbers.ToString();
 
-
+            OnUnlockCheck();
         }
+
         void ClearNumbers()
         {
             m_InputedNumbers = 0;
             m_InputText.text = "";
         }
-
 
 
         #region 自動生成按鍵
@@ -65,7 +60,6 @@
         [SerializeField] GridLayoutGroup m_GridLayout;
         [SerializeField] UnityEvent m_OnKeyInput;
         int m_NumbersCount = 12;
-
 
         public IEnumerator GenerateKeypad()
         {
@@ -79,34 +73,32 @@
             for (int i = 0; i < count; i++)
             {
                 var keynum = Instantiate(reference, parent);
-                if (i == 11)
-                {
-                    keynum.ToEmptyObject();
-                }
 
+                //特殊按鈕種類
+                switch (i)
+                {
+                    case 9:
+                        keynum.SetText("清除");
+                        keynum.m_OnKeyPress = ClearNumbers;
+                        continue;
+                    case 11:
+                        keynum.SetText("離開");
+                        keynum.m_OnKeyPress = OnExitInteraction;
+                        continue;
+                }
                 int curNum = i + 1;
                 if (curNum == 11)
                     curNum = 0;
 
-                if (i == 9)
-                {
-                    keynum.SetText("清除");
-                    keynum.m_OnKeyPress = ClearNumbers;
-                    continue;
-                }
-
                 keynum.SetText(curNum);
 
                 keynum.m_OnKeyPress = () => InputNumber(curNum);
+
             }
             Destroy(reference.gameObject);
             yield return null;
-
             layout.enabled = false;
         }
-
-
-
         #endregion
     }
 }
