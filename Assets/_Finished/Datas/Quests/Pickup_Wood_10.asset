@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d666f448761474944bf8fd57af3d88ba, type: 3}
+  m_Name: Pickup_Wood_10
+  m_EditorClassIdentifier: 
+  developerNote: 
+  initialValue:
+    name: "\u64BF\u8D773\u500B\u6728\u982D"
+    namePattern: "\u64BF\u8D77{c}\u500B{item}"
+    description: "\u9700\u8981\u4F60\u64BF\u8D773\u500B\u6728\u982D"
+    descriptionPattern: "\u9700\u8981\u4F60\u64BF\u8D77{c}\u500B{item}"
+    IDName: Pickup.Apple_10
+    goal:
+      requiredQuestIDName: 
+      requiredItem: {fileID: 11400000, guid: 66fb0ca7ac3bc424198b4356620590e2, type: 2}
+      goalCount: 3
+    currentCount: 0
+    active: 1
+    complete: 1
