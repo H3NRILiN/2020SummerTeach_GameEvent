@@ -35,7 +35,7 @@ namespace ISU.Lesson.Delegate.WeaponExample
             m_CurrentWeaponSlot++;
             m_CurrentWeaponSlot = (int)Mathf.Repeat(m_CurrentWeaponSlot, m_Weapon.Length);
 
-            Debug.Log($"切換到武器: {m_Weapon[m_CurrentWeaponSlot]}");
+            Debug.Log($"切換到武器: {m_Weapon[m_CurrentWeaponSlot].GetName()}");
 
             m_OnAttack = m_Weapon[m_CurrentWeaponSlot].OnAttack;
         }

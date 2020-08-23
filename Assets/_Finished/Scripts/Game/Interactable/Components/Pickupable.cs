@@ -8,7 +8,7 @@ namespace ISU.Example
 {
     [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(Interactable))]
-    public class Pickupable : SubInteractor
+    public class Pickupable : SubInteractor, ISerializationCallbackReceiver
     {
         // [SerializeField] QuestManager m_QuestManger;
         // [SerializeField] AchievementManager m_AchievementManager;
@@ -38,6 +38,24 @@ namespace ISU.Example
                 // m_QuestManger.AddCount(m_Item, m_ItemCount);
             }
             Destroy(gameObject);
+        }
+
+        public void OnBeforeSerialize()
+        {
+
+        }
+
+        public void OnAfterDeserialize()
+        {
+            // var interactable = GetComponent<Interactable>();
+            // if (interactable)
+            // {
+            //     if (interactable.m_UseItemData)
+            //     {
+            //         interactable.m_ObjectName = m_Item.m_ItemName;
+            //         interactable.m_TextColor = m_Item.m_DisplayColor;
+            //     }
+            // }
         }
     }
 }

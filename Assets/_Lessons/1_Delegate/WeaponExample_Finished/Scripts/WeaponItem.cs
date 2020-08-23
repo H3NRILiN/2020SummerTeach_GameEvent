@@ -18,5 +18,10 @@
             Debug.Log($"攻擊目標: <b>{target.m_CharacterName}</b>");
             target.TakeDamage(m_Damage);
         }
+
+        public string GetName()
+        {
+            return m_WeaponName;
+        }
     }
 }

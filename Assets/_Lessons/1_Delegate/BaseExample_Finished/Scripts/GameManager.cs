@@ -5,12 +5,13 @@ namespace ISU.Lesson.Delegate.BaseExample
 {
     public class GameManager : MonoBehaviour
     {
-        private void Awake()
+        private void OnEnable()
         {
             var manager = FindObjectOfType<GameManager>();
             if (manager != null && manager != this)
             {
                 Destroy(manager.gameObject);
+                return;
             }
             DontDestroyOnLoad(gameObject);
 

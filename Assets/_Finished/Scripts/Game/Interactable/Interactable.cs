@@ -8,11 +8,11 @@ namespace ISU.Example
 {
     [RequireComponent(typeof(Collider))]
     [SelectionBase]
-    public class Interactable : MonoBehaviour, ISerializationCallbackReceiver
+    public class Interactable : MonoBehaviour
     {
         [SerializeField] InteractionManager m_InteractionManager;
         [SerializeField] GameEvent m_OnInteract;
-        [SerializeField] bool m_UseItemData;
+        public bool m_UseItemData;
         public string m_ObjectName;
         //顏色 (用於字等等的)
         public Color m_TextColor = Color.white;
@@ -97,22 +97,6 @@ namespace ISU.Example
             Gizmos.DrawCube(pos, Vector3.one * .1f);
         }
 
-        public void OnBeforeSerialize()
-        {
 
-        }
-
-        public void OnAfterDeserialize()
-        {
-            if (m_SubInteractor
-            && m_SubInteractor is Pickupable
-            && ((Pickupable)m_SubInteractor).m_Item
-            && m_UseItemData)
-            {
-                var pickupable = m_SubInteractor as Pickupable;
-                m_ObjectName = pickupable.m_Item.m_ItemName;
-                m_TextColor = pickupable.m_Item.m_DisplayColor;
-            }
-        }
     }
 }

@@ -7,7 +7,7 @@ namespace ISU.Lesson.Delegate.BaseExample
         DelegateTest m_DelegateTest;
         ActionFuncTest m_ActionFuncTest;
         [SerializeField] string m_MyName = "物件";
-        private void OnEnable()
+        private void Start()
         {
             m_DelegateTest = FindObjectOfType<DelegateTest>();
             m_DelegateTest.m_OnDoThing += SayMyName;
