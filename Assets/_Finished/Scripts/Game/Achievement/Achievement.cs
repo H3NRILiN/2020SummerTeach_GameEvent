@@ -23,7 +23,7 @@ namespace ISU.Example
 
             for (int i = 0; i < stages.Length; i++)
             {
-                stages[i].CompareCounts(currentCount, onComplete);
+                stages[i].AddCount(currentCount, onComplete);
             }
         }
 
@@ -81,15 +81,16 @@ namespace ISU.Example
         // public bool isActive;
         public bool isCompleted;
 
-        public bool CompareCounts(int count, Action<AchievementStage> onComplete)
+        public void AddCount(int count, Action<AchievementStage> onComplete)
         {
+            if (isCompleted)
+                return;
+
             if (count >= goalCount)
             {
                 onComplete(this);
                 isCompleted = true;
-                return true;
             }
-            return false;
         }
     }
     public enum QuestType

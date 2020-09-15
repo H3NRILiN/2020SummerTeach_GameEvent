@@ -11,8 +11,11 @@ namespace ISU.Example
         [SerializeField] ListQuestVariable m_TrackingQuests;
         [SerializeField] UIQuestNoticeBlock[] m_NoticeBlocks;
 
+        [SerializeField] bool m_DebugMode;
+
         #region Edtior用
 
+#if UNITY_EDITOR
         [SerializeField] RectTransform m_NoticeListContainer;
         [SerializeField] UIQuestNoticeBlock m_NoticeBlockPrefab;
         [SerializeField] IntVariable m_NoticeBlockCount;
@@ -46,8 +49,9 @@ namespace ISU.Example
                 m_NoticeBlocks = new UIQuestNoticeBlock[m_NoticeBlockCount.value];
                 for (int i = 0; i < m_NoticeBlockCount.value; i++)
                 {
-                    //實例化，命名
-                    m_NoticeBlocks[i] = Instantiate(m_NoticeBlockPrefab, m_NoticeListContainer);
+                    //Prefab實例化維持link，命名
+                    m_NoticeBlocks[i] = UnityEditor.PrefabUtility.InstantiatePrefab(m_NoticeBlockPrefab, m_NoticeListContainer) as UIQuestNoticeBlock;
+                    //m_NoticeBlocks[i] = Instantiate(m_NoticeBlockPrefab, m_NoticeListContainer);
                     m_NoticeBlocks[i].name = $"Block {m_NoticeBlockCount.value - i}";
                 }
                 //Linq依命名排序
@@ -57,6 +61,7 @@ namespace ISU.Example
 
             ActiveLayout(false);
         }
+#endif
         #endregion
 
         private void Start()
@@ -77,24 +82,28 @@ namespace ISU.Example
 
         public void UpdateUI()
         {
-            foreach (var item in m_TrackingQuests.value)
+            if (m_DebugMode)
             {
-                Debug.Log($"{item.name} : {item.currentCount}");
+                foreach (var item in m_TrackingQuests.value)
+                {
+                    Debug.Log($"{item.name} : {item.currentCount}");
+                }
             }
+
             for (int i = 0; i < m_NoticeBlocks.Length; i++)
             {
                 if (i >= m_TrackingQuests.value.Count || m_TrackingQuests.value[i] == null)
                 {
-                    m_NoticeBlocks[i].UpdateInfo(null);
+                    m_NoticeBlocks[i].ResetUI();
                     continue;
                 }
                 if (!m_NoticeBlocks[i].m_CurrentQuestIDName.Equals(m_TrackingQuests.value[i].IDName))
                 {
-                    m_NoticeBlocks[i].Notice(m_TrackingQuests.value[i]);
+                    m_NoticeBlocks[i].UpdateUIFirstTime(m_TrackingQuests.value[i]);
                 }
                 else
                 {
-                    m_NoticeBlocks[i].UpdateInfo(m_TrackingQuests.value[i]);
+                    m_NoticeBlocks[i].UpdateUI(m_TrackingQuests.value[i]);
                 }
             }
         }

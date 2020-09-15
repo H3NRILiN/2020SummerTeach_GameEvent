@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using ISU.Example.Events;
 using UnityEngine;
@@ -21,17 +22,12 @@ namespace ISU.Example
         //互動時觸發事件
         [SerializeField] UnityEvent m_Event;
 
-        public SubInteractor m_SubInteractor;
+        public Action m_OnSubInteract;
 
         private void Reset()
         {
             //自動設置Tag
             this.tag = "Interactable";
-
-            // if (GetComponent<Collider>() == null)
-            // {
-            //     gameObject.AddComponent<BoxCollider>();
-            // }
         }
         void Start()
         {
@@ -48,10 +44,10 @@ namespace ISU.Example
             m_Event.Invoke();
             m_OnInteract.Raise();
 
-            if (m_SubInteractor != null)
+            if (m_OnSubInteract != null)
             {
                 //觸發Pickup動作
-                m_SubInteractor.OnInteract();
+                m_OnSubInteract();
             }
         }
 
@@ -60,6 +56,8 @@ namespace ISU.Example
             //取消註冊
             m_InteractionManager.UnRegister(this);
         }
+
+
 
         private void OnDrawGizmos()
         {

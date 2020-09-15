@@ -93,18 +93,11 @@ namespace ISU.Example
                 if (m_DebugMode) Debug.Log($"Add {item.m_ItemName} : {amount}");
                 for (int i = 0; i < m_ItemMatchedQuests[item].Count; i++)
                 {
-                    m_ItemMatchedQuests[item][i].AddCount(amount);
+                    m_ItemMatchedQuests[item][i].AddCount(amount, (x) => OnComplete(x));
                 }
             }
         }
-        /// <summary>
-        /// 增加Quest的計量，依Item尋找Quest，增加1
-        /// </summary>
-        /// <param name="item"></param>
-        public void AddCount(ItemObject item)
-        {
-            AddCount(item, 1);
-        }
+
         /// <summary>
         ///  增加Quest的計量，依IDName尋找Quest，增加amount
         /// </summary>
@@ -114,9 +107,19 @@ namespace ISU.Example
         {
             if (m_NameMatchedQuests.ContainsKey(IDName))
             {
-                m_NameMatchedQuests[IDName].AddCount(amount);
+                m_NameMatchedQuests[IDName].AddCount(amount, (x) => OnComplete(x));
             }
         }
+
+        /// <summary>
+        /// 增加Quest的計量，依Item尋找Quest，增加1
+        /// </summary>
+        /// <param name="item"></param>
+        public void AddCount(ItemObject item)
+        {
+            AddCount(item, 1);
+        }
+
         /// <summary>
         ///  增加Quest的計量，依IDName尋找Quest，增加1
         /// </summary>
@@ -130,6 +133,12 @@ namespace ISU.Example
         {
             AddCount(itemWhithCount.value.itemValue, itemWhithCount.value.intValue);
             m_OnItemAdd.Raise();
+        }
+
+        public void OnComplete(Quest quest)
+        {
+            if (m_DebugMode)
+                Debug.Log($"任務 {quest.name} 完成!");
         }
     }
 }

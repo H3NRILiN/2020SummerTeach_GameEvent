@@ -33,6 +33,8 @@ namespace ISU.Example
         }
         void PanelOpen(QuestVariable[] quests)
         {
+            if (CurrentBuildPanelCoroutine != null)
+                StopCoroutine(CurrentBuildPanelCoroutine);
             CurrentBuildPanelCoroutine = BuildPanelContent(quests);
             StartCoroutine(CurrentBuildPanelCoroutine);
         }
@@ -44,8 +46,7 @@ namespace ISU.Example
                 Destroy(existBoard.gameObject);
             }
 
-            AutoLayout(true);
-            yield return null;
+            yield return SetLayout(true);
 
             GameState.m_PlayerCursorLock(false);
             GameState.m_PlayerCanMove(false);
@@ -61,14 +62,14 @@ namespace ISU.Example
                 board.SetInfos(curQuest, () => Accept(curQuest, board), fadeDuration);
                 yield return buildDelay;
             }
-            yield return null;
-            AutoLayout(false);
+            yield return SetLayout(false);
         }
 
-        private void AutoLayout(bool on)
+        IEnumerator SetLayout(bool on)
         {
             m_ContainerSizeFittter.enabled = on;
             m_ContainerLayout.enabled = on;
+            yield return null;
         }
 
         public void Exit()

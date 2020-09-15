@@ -117,7 +117,6 @@ MonoBehaviour:
   m_Event:
     m_PersistentCalls:
       m_Calls: []
-  m_SubInteractor: {fileID: 6835137458475144173}
 --- !u!114 &6835137458475144173
 MonoBehaviour:
   m_ObjectHideFlags: 0

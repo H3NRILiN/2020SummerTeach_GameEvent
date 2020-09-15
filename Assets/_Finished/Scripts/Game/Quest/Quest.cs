@@ -20,7 +20,6 @@ namespace ISU.Example
         public string IDName;
         public Goal goal;
 
-
         [Serializable]
         public class Goal
         {
@@ -44,7 +43,7 @@ namespace ISU.Example
             active = true;
         }
 
-        public void AddCount(int amount)
+        public void AddCount(int amount, Action<Quest> onComplete)
         {
             if (complete)
                 return;
@@ -52,6 +51,7 @@ namespace ISU.Example
             currentCount += amount;
             if (currentCount >= goal.goalCount)
             {
+                onComplete(this);
                 complete = true;
             }
         }
