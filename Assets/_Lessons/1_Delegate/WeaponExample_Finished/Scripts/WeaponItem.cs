@@ -7,21 +7,27 @@
     {
         [SerializeField] string m_WeaponName;
         [SerializeField] float m_Damage;
+        [SerializeField] Sprite m_Icon;
+
+
+
+        public string WeaponName { get => m_WeaponName; }
+        public float Damage { get => m_Damage; }
+        public Sprite Icon { get => m_Icon; }
+
         public void OnAttack(Damagable target)
         {
-            Debug.Log($"使用武器 : <b>{m_WeaponName}</b>");
+
+            Debugger.DebugLog($"使用武器 : <b>{WeaponName}</b>");
             if (!target)
             {
-                Debug.Log("<color=yellow>揮空</color>");
+                Debugger.DebugLog("<color=yellow>揮空</color>");
                 return;
             }
-            Debug.Log($"攻擊目標: <b>{target.m_CharacterName}</b>");
-            target.TakeDamage(m_Damage);
+            Debugger.DebugLog($"攻擊目標: <b>{target.m_CharacterName}</b>");
+            target.TakeDamage(Damage);
         }
 
-        public string GetName()
-        {
-            return m_WeaponName;
-        }
+
     }
 }

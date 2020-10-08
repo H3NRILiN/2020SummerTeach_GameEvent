@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Lessons/1_Delegate/BaseExample_Finished/Scene/1_Delegate_BaseExample_Scene2.unity
     guid: e61d426db55c4be489c864b0cf343dba
+  - enabled: 1
+    path: Assets/_Lessons/3_DesignPattern/ObserverPattern/Static Event/ObserverPattern_StaticVer.unity
+    guid: 88f1cd946a49f264c8bbcd117054b2c4
   m_configObjects: {}
