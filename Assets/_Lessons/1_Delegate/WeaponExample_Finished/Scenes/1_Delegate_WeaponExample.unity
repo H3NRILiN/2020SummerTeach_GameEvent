@@ -752,7 +752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_WeaponTest: {fileID: 0}
   m_Pointer: {fileID: 2101366350}
-  m_WorldSpaceOffset: {x: 0, y: 2, z: 0}
+  m_WorldSpaceOffset: {x: 0, y: 1.5, z: 0}
 --- !u!1 &871882199
 GameObject:
   m_ObjectHideFlags: 0
