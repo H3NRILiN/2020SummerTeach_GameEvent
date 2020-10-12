@@ -10,7 +10,7 @@ public class ConnectionLine : MonoBehaviour
     [SerializeField] int m_Steps = 10;
     [SerializeField] float m_MidYOffset = -1;
     [SerializeField] Color m_NormalColor;
-    [SerializeField] Color m_ProcessColor;
+    public Color m_ProcessColor;
     [Range(0, 1)] public float m_Process;
     Vector3 m_MidPoint;
 

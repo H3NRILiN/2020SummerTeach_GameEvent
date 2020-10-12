@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8176212872785766733}
   - component: {fileID: 8536428572280744168}
   m_Layer: 0
-  m_Name: Observer
+  m_Name: EventObserver_Static
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ObjectName: "\u7269\u4EF6"
   m_Line: {fileID: 8176212873023722766}
+  m_Sprite: {fileID: 8176212872785766733}
 --- !u!1 &8176212873023722801
 GameObject:
   m_ObjectHideFlags: 0

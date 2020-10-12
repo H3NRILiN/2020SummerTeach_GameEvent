@@ -15,8 +15,6 @@
         [SerializeField] UnityEvent m_OnExit;
         [SerializeField] UnityEvent m_OnUnlock;
 
-        [SerializeField] CameraAnimationTarget camAnimTarget;
-        public CameraAnimationTarget m_CamAnimTarget { get => camAnimTarget; set => camAnimTarget = value; }
         public Action OnExitInteractionEvent { get; set; }
 
         int m_InputedNumbers;
@@ -58,7 +56,7 @@
         [SerializeField] KeypadNumber m_KeypadNumberReference;
         [SerializeField] Transform m_KeypadNumberParent;
         [SerializeField] GridLayoutGroup m_GridLayout;
-        [SerializeField] UnityEvent m_OnKeyInput;
+
         int m_NumbersCount = 12;
 
         public IEnumerator GenerateKeypad()

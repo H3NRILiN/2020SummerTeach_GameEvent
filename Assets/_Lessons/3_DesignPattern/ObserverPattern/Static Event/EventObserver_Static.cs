@@ -8,13 +8,15 @@ public class EventObserver_Static : MonoBehaviour
 
     [SerializeField] ConnectionLine m_Line;
 
+    [SerializeField] SpriteRenderer m_Sprite;
+
     bool m_SenderAssign;
 
     Tween m_ProcessTween;
 
     private void OnEnable()
     {
-        EventSender_Static.m_OnEventSend += ReciveEvent;
+        EventSender_Static.m_OnEventSend += ReceiveEvent;
         EventSender_Static.m_OnRegisterEvent += RegisterEvent;
         EventSender_Static.m_OnEventReset += ResetEvent;
         m_Line.m_EndPoint = transform;
@@ -22,7 +24,7 @@ public class EventObserver_Static : MonoBehaviour
 
     private void OnDisable()
     {
-        EventSender_Static.m_OnEventSend -= ReciveEvent;
+        EventSender_Static.m_OnEventSend -= ReceiveEvent;
         EventSender_Static.m_OnRegisterEvent -= RegisterEvent;
         EventSender_Static.m_OnEventReset -= ResetEvent;
     }
@@ -35,12 +37,17 @@ public class EventObserver_Static : MonoBehaviour
     {
     }
 
-    void ReciveEvent()
+    void ReceiveEvent(Color color)
     {
         if (!m_ProcessTween.IsActive())
         {
-            m_ProcessTween = DOTween.To(() => m_Line.m_Process, x => m_Line.m_Process = x, 1, 0.5f).
-                      OnComplete(() => Debug.Log($"名稱:{m_ObjectName}"));
+            m_Line.m_ProcessColor = color;
+            m_ProcessTween = DOTween.To(() => m_Line.m_Process, x => m_Line.m_Process = x, 1, 0.5f)
+            .OnComplete(() =>
+            {
+                Debug.Log($"名稱:{m_ObjectName}");
+                m_Sprite.color = color;
+            });
         }
 
     }

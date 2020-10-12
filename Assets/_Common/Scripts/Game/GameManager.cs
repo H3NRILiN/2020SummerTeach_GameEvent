@@ -10,12 +10,18 @@ namespace ISU.Common
         [SerializeField] PlayerController m_PlayerPrefab;
         static PlayerController m_Player;
 
-        private void Awake()
+        private void OnEnable()
         {
-
             GameState.m_PlayerCanMove = FPSPlayerCanMove;
             GameState.m_PlayerCursorLock = FPSCursorLock;
-
+        }
+        private void OnDisable()
+        {
+            GameState.m_PlayerCanMove -= FPSPlayerCanMove;
+            GameState.m_PlayerCursorLock -= FPSCursorLock;
+        }
+        private void Awake()
+        {
             m_Player = FindObjectOfType<PlayerController>();
             if (!m_Player)
                 m_Player = Instantiate(m_Player);

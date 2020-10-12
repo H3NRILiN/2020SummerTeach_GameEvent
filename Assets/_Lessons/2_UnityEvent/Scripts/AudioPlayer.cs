@@ -13,6 +13,7 @@
             m_Source = GetComponent<AudioSource>();
         }
 
+        //播放音效
         public void PlayAudio(AudioClip clip)
         {
             m_Source.PlayOneShot(clip);
