@@ -5,15 +5,25 @@ namespace ISU.Lesson.Delegate.BaseExample
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] GameObject m_DelegateTest;
         private void OnEnable()
         {
-            var manager = FindObjectOfType<GameManager>();
-            if (manager != null && manager != this)
+            var script = FindObjectOfType<DelegateTest>();
+            if (script == null)
             {
-                Destroy(manager.gameObject);
-                return;
+                Instantiate(m_DelegateTest);
             }
-            DontDestroyOnLoad(gameObject);
+
+            // var managers = FindObjectsOfType<GameManager>();
+            // foreach (var m in managers)
+            // {
+            //     if (m != this)
+            //     {
+            //         Destroy(m.gameObject);
+            //         continue;
+            //     }
+            // }
+            // DontDestroyOnLoad(gameObject);
 
         }
         public void ResetGame()

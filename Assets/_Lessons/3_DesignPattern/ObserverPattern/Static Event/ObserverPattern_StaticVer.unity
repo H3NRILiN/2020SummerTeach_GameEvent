@@ -701,7 +701,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b06b3d2ddb9b87d45855df304a3c1215, type: 3}
-  m_Color: {r: 0, g: 0.4927125, b: 1, a: 1}
+  m_Color: {r: 0.06398509, g: 0.6509434, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 1834818360}
-  m_SendingColor: {r: 0, g: 0.4927125, b: 1, a: 1}
+  m_SendingColor: {r: 0.06398509, g: 0.6509434, b: 0, a: 1}
 --- !u!1001 &1960159422
 PrefabInstance:
   m_ObjectHideFlags: 0
