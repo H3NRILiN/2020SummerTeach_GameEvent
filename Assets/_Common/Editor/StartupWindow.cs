@@ -13,12 +13,10 @@ namespace ISU.Common.HelpWindow
 
         [SerializeField] StartupWindowConfiguration m_Settings;
 
-        GUIStyle m_SceneLoadTitle = new GUIStyle();
+        GUIStyle m_LessonLoadTitle = new GUIStyle();
         GUIStyle m_LessonTitle = new GUIStyle();
         GUIStyle m_ButtonStyle = new GUIStyle();
         GUIStyle m_DescriptionLabel = new GUIStyle();
-
-        [SerializeField] AnimBool[] m_MoreInfoAreaOpens;
 
         [SerializeField] Vector2 m_MainAreaScroll;
 
@@ -34,11 +32,18 @@ namespace ISU.Common.HelpWindow
         private void OnEnable()
         {
             GetSetting();
+
+            foreach (var set in m_Settings.m_SceneSettings)
+            {
+                set.lessonOpen.valueChanged.AddListener(Repaint);
+                set.moreInfoOpen.valueChanged.AddListener(Repaint);
+            }
         }
 
         [InitializeOnLoadMethod]
         void GetSetting()
         {
+            m_AlreadyStyleSet = false;
             if (m_Settings == null)
             {
                 var guid = AssetDatabase.FindAssets("t:StartupWindowConfiguration").FirstOrDefault();
@@ -46,24 +51,17 @@ namespace ISU.Common.HelpWindow
 
                 m_Settings = (StartupWindowConfiguration)AssetDatabase.LoadAssetAtPath(path, typeof(StartupWindowConfiguration));
             }
-
-            m_MoreInfoAreaOpens = new AnimBool[m_Settings.m_SceneSettings.Length];
-
-            for (int i = 0; i < m_MoreInfoAreaOpens.Length; i++)
-            {
-                m_MoreInfoAreaOpens[i] = new AnimBool();
-                m_MoreInfoAreaOpens[i].target = true;
-                m_MoreInfoAreaOpens[i].valueChanged.AddListener(Repaint);
-            }
         }
         void StylesSet()
         {
             if (m_AlreadyStyleSet)
                 return;
 
-            m_SceneLoadTitle = new GUIStyle(EditorStyles.label);
-            m_SceneLoadTitle.fontSize = 18;
-            m_SceneLoadTitle.alignment = TextAnchor.MiddleCenter;
+            m_LessonLoadTitle = new GUIStyle(EditorStyles.miniButton);
+
+            m_LessonLoadTitle.fontSize = 20;
+            m_LessonLoadTitle.fixedHeight = EditorGUIUtility.singleLineHeight * 2;
+            m_LessonLoadTitle.alignment = TextAnchor.MiddleCenter;
 
             m_ButtonStyle = new GUIStyle(GUI.skin.button);
             m_ButtonStyle.fontSize = 15;
@@ -80,81 +78,77 @@ namespace ISU.Common.HelpWindow
             if (!m_Settings)
                 return;
 
-            FolderSet folderSet;
             SceneSet set;
-            AnimBool moreInfoOpen;
-
-            for (int i = 0; i < m_Settings.folder.Length; i++)
+            for (int i = 0; i < m_Settings.m_SceneSettings.Length; i++)
             {
-                folderSet = m_Settings.folder[i];
-
-                for (int j = 0; j < m_Settings.m_SceneSettings.Length; j++)
-                {
-                    set = m_Settings.m_SceneSettings[j];
-                    moreInfoOpen = m_MoreInfoAreaOpens[j];
-
-                    if (folderSet.lesson != set.lesson)
-                        continue;
-
-
-                    SceneSelectionArea(set, folderSet.folder, ref moreInfoOpen);
-                }
+                set = m_Settings.m_SceneSettings[i];
+                SceneSelectionArea(set, set.folder, ref set.moreInfoOpen, ref set.lessonOpen);
             }
+
             GUILayout.Space(15);
             GUILayout.EndScrollView();
         }
 
         float m_BannerWidth;
-        void SceneSelectionArea(SceneSet set, Object folder, ref AnimBool moreInfoOpen)
+        void SceneSelectionArea(SceneSet set, Object folder, ref AnimBool moreInfoOpen, ref AnimBool lessonOpen)
         {
             GUILayout.Space(15);
-            var rect = EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             {
                 GUILayout.Space(10);
+
                 //場景名稱
-
-
-                GUILayout.Label(set.name, m_SceneLoadTitle);
-
+                var buttonContent = lessonOpen.target ? new GUIContent() : EditorGUIUtility.IconContent("d_icon dropdown@2x");
+                buttonContent.text = set.name;
+                buttonContent.tooltip = $"點下查看{set.name}內容";
+                if (GUILayout.Button(buttonContent, m_LessonLoadTitle))
+                {
+                    lessonOpen.target = !lessonOpen.target;
+                }
+                //GUILayout.Label(set.name, m_SceneLoadTitle);
                 GUILayout.Space(10);
 
-                //原始1920x600
-                m_BannerWidth = 650;//= EditorGUILayout.Slider(m_BannerWidth, 0, 1000);
-                float hieght = m_BannerWidth * 0.3125f;
-
-                //橫幅
-
-                //置中用
-                BeginCenterLayout();
-                if (set.banner)
-                    GUILayout.Label(set.banner, GUILayout.Width(m_BannerWidth), GUILayout.Height(hieght));
-                EndCenterLayout();
-
-                Separator();
-
-                //場景專案位置
-                var scenePath = AssetDatabase.GetAssetPath(set.scene);
-
-                //若已經在場景就取消按鈕互動
-                EditorGUI.BeginDisabledGroup(EditorSceneManager.GetActiveScene().path == scenePath);
-                if (GUILayout.Button("進入場景", m_ButtonStyle))
+                if (EditorGUILayout.BeginFadeGroup(lessonOpen.faded))
                 {
+                    //原始1920x600
+                    m_BannerWidth = 650;//= EditorGUILayout.Slider(m_BannerWidth, 0, 1000);
+                    float hieght = m_BannerWidth * 0.3125f;
 
-                    if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                    //橫幅
+
+                    //置中用
+                    BeginCenterLayout();
+                    if (set.banner)
+                        GUILayout.Label(set.banner, GUILayout.Width(m_BannerWidth), GUILayout.Height(hieght));
+                    EndCenterLayout();
+
+                    Separator();
+
+                    //場景專案位置
+                    var scenePath = AssetDatabase.GetAssetPath(set.scene);
+
+                    //若已經在場景就取消按鈕互動
+                    EditorGUI.BeginDisabledGroup(EditorSceneManager.GetActiveScene().path == scenePath);
+                    if (GUILayout.Button("進入場景", m_ButtonStyle))
                     {
-                        EditorSceneManager.OpenScene(scenePath);
+
+                        if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                        {
+                            EditorSceneManager.OpenScene(scenePath);
+                        }
                     }
+                    EditorGUI.EndDisabledGroup();
+                    //顯示更多資訊
+                    moreInfoOpen = MoreInfoArea(moreInfoOpen, set.description);
+
+                    Separator();
+
+                    //提醒資料夾位置
+                    FolderLocationArea(folder);
+
+                    GUILayout.Space(15);
                 }
-                EditorGUI.EndDisabledGroup();
-                //顯示更多資訊
-                moreInfoOpen = MoreInfoArea(moreInfoOpen, set.description);
-
-                Separator();
-
-                //提醒資料夾位置
-                FolderLocationArea(folder);
-
-                GUILayout.Space(15);
+                EditorGUILayout.EndFadeGroup();
             }
             EditorGUILayout.EndVertical();
         }
@@ -163,10 +157,11 @@ namespace ISU.Common.HelpWindow
 
         void FolderLocationArea(Object folder)
         {
-            if (GUILayout.Button("尋找資料夾"))
+            if (GUILayout.Button("尋找資料夾", GUILayout.Width(200)))
             {
                 EditorUtility.FocusProjectWindow();
-                EditorGUIUtility.PingObject(folder);
+                if (folder)
+                    EditorGUIUtility.PingObject(folder);
             }
         }
 

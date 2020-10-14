@@ -22,11 +22,12 @@ namespace ISU.Common.HelpWindow
         public string name;
         public Lessons lesson;
         public SceneAsset scene;
+        public Object folder;
         public Texture2D banner;
         [TextArea(5, 25)] public string description;
 
-        public AnimBool m_LeesonOpen = new AnimBool(false);
-        public AnimBool m_MoreInfoOpen = new AnimBool(false);
+        public AnimBool lessonOpen = new AnimBool(false);
+        public AnimBool moreInfoOpen = new AnimBool(false);
     }
 
     [Serializable]
