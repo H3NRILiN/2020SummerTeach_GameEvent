@@ -19,15 +19,24 @@ MonoBehaviour:
     scene: {fileID: 102900000, guid: 77309ca6412c1414ba1c3976680c11b8, type: 3}
     folder: {fileID: 102900000, guid: 688193cc04dbe2a44be8617bd7631b41, type: 3}
     banner: {fileID: 2800000, guid: f300e5e1a7b5d7b4aa1ab022a718a2e4, type: 3}
-    description: "- Delegate\u4ECB\u7D39\n- Action\u8207Func\n- Lambda"
+    description: "<size=15>\u5927\u7DB1\uFF1A</size>\n---Delegate\u4ECB\u7D39\n---Action\u8207Func\u4ECB\u7D39\n---Lambda\u4ECB\u7D39\n\n<size=15>\u64CD\u4F5C\u4ECB\u7D39\uFF1A</size>\n***Playmode\u6642\uFF0C\u5728
+      <b>DelegateTest\u7269\u4EF6</b> \u53EF\u4EE5\u958B\u95DC <b>DelegateTest\u8173\u672C</b>
+      \u8207 <b>ActionFuncTest\u8173\u672C</b> \u4F86\u89C0\u5BDF\u5169\u7A2E\u5BEB\u6CD5\u7684\u5DEE\u5225\u8207\u7D50\u679C\n\n***\u5834\u666F\u958B\u59CB\u6703\u547C\u53EB\u6578\u5B78\u8A08\u7B97\uFF0C\u662F\u4F7F\u7528\u540C\u6A23\u7684method\u4E26\u5229\u7528
+      <b>lambda</b> \u4F86\u5206\u5225\u5B9A\u7FA9\u4E0D\u540C\u7684\u7B97\u5F0F\n\n***\u6309\u4E0B
+      <b>S\u9375</b> \u767C\u9001\u4E8B\u4EF6\uFF0C\u63A5\u8457\u53EF\u4EE5\u85C9\u7531\u958B\u95DC
+      Object B~E \u8207 Object Apple \uFF0C\u4E26\u5F9E Console \u4F86\u89C0\u5BDF
+      <b>delegate</b> \u8A3B\u518A\u8207\u53CD\u8A3B\u518A\u7684\u60C5\u6CC1\n\n***\u6309\u4E0B
+      <b>\u7A7A\u767D\u9375</b> \u767C\u9001\u5E36\u6709\u53C3\u6578\u7684\u4E8B\u4EF6\uFF0C\u53EF\u4EE5\u8B8A\u63DB\u4E2D\u592EUI\u6587\u5B57\u8207\u6587\u5B57\u984F\u8272\uFF0C\u53EF\u4EE5\u5728
+      <b>DelegateTest\u8173\u672C</b> \u6216\u662F <b>ActionFuncTest\u8173\u672C</b>
+      \u4F86\u6539\u8B8A\u986F\u793A\u7684\u6587\u5B57\n"
     lessonOpen:
       m_Target: 1
       speed: 2
       m_Value: 1
     moreInfoOpen:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
   - active: 1
     name: "Delegate\u6B66\u5668\u61C9\u7528"
     lesson: 0
@@ -41,9 +50,9 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     moreInfoOpen:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
   - active: 1
     name: "UnityEvent\u5BC6\u78BC\u9580"
     lesson: 1
@@ -52,9 +61,9 @@ MonoBehaviour:
     banner: {fileID: 2800000, guid: fa830ff0b743e2547bead2a4eb88fffa, type: 3}
     description: 
     lessonOpen:
-      m_Target: 1
+      m_Target: 0
       speed: 2
-      m_Value: 1
+      m_Value: 0
     moreInfoOpen:
       m_Target: 0
       speed: 2
@@ -67,13 +76,13 @@ MonoBehaviour:
     banner: {fileID: 2800000, guid: 802461482d8e9ac47a11cdceff8b8fc0, type: 3}
     description: 
     lessonOpen:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
     moreInfoOpen:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
   - active: 1
     name: "ObserverPattern\u975C\u614B\u4E8B\u4EF6"
     lesson: 2
@@ -112,9 +121,9 @@ MonoBehaviour:
     banner: {fileID: 2800000, guid: 5ce11a44c7f74bf478dfcf7599944474, type: 3}
     description: 
     lessonOpen:
-      m_Target: 1
+      m_Target: 0
       speed: 2
-      m_Value: 1
+      m_Value: 0
     moreInfoOpen:
       m_Target: 1
       speed: 2

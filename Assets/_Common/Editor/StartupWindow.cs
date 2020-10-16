@@ -157,6 +157,7 @@ namespace ISU.Common.HelpWindow
             LinkButton("聯絡我");
             GUILayout.Space(10);
             SendCommentButton();
+            DeveloperSettingButton();
             EndCenterLayout();
         }
         void LinkButton(string label, string url = "")
@@ -190,7 +191,24 @@ namespace ISU.Common.HelpWindow
             EditorGUI.EndDisabledGroup();
         }
 
+        bool m_DevMode;
+        void DeveloperSettingButton()
+        {
+            m_DevMode = true;
+            if (m_DevMode)
+            {
+                var content = new GUIContent(EditorGUIUtility.IconContent("SettingsIcon"));
+                content.text = "";
+                if (GUILayout.Button(content))
+                {
+                    Selection.activeObject = m_Settings;
+                }
+            }
+        }
+
         float m_BannerWidth;
+
+
         void SceneSelectionArea(SceneSet set, Object folder, ref AnimBool moreInfoOpen, ref AnimBool lessonOpen)
         {
             //課程區域之間的距離
@@ -310,7 +328,15 @@ namespace ISU.Common.HelpWindow
                 GUILayout.BeginVertical(GUI.skin.box);
 
                 GUILayout.Label("說明：");
-                GUILayout.Label(description);
+
+                var style = new GUIStyle(EditorStyles.largeLabel);
+                style.richText = true;
+                style.wordWrap = true;
+
+                description = description.Replace("***", "<size=18> ◆ </size>");
+                description = description.Replace("---", "<size=18> - </size>");
+
+                GUILayout.Label(description, style);
 
 
                 GUILayout.EndVertical();
