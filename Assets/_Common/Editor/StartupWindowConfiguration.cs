@@ -13,12 +13,14 @@ namespace ISU.Common.HelpWindow
         Delegate,
         UnityEvent,
         DesignPattern,
-        GameEvent
+        GameEvent,
+        Other
     }
 
     [Serializable]
     public class SceneSet
     {
+        public bool active;
         public string name;
         public Lessons lesson;
         public SceneAsset scene;
