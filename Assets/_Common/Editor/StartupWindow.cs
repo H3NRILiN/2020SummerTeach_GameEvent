@@ -35,7 +35,7 @@ namespace ISU.Common.HelpWindow
         static void Init()
         {
             var window = GetWindow<StartupWindow>("ISU教學幫助視窗");
-            window.minSize = new Vector2(690, 840);
+            window.minSize = new Vector2(690, 500);
         }
 
         private void OnEnable()
