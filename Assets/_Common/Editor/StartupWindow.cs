@@ -101,7 +101,7 @@ namespace ISU.Common.HelpWindow
 
 
             GUILayout.Space(10);
-            m_MainAreaScroll = GUILayout.BeginScrollView(m_MainAreaScroll);
+            m_MainAreaScroll = GUILayout.BeginScrollView(m_MainAreaScroll, "box");
 
             if (!m_Settings)
                 return;
@@ -121,7 +121,7 @@ namespace ISU.Common.HelpWindow
 
             GUILayout.Space(15);
             GUILayout.EndScrollView();
-
+            GUILayout.Space(5);
             if (m_CommentWindowShow)
                 m_CommentWindowRect = GUILayout.Window(-99, m_CommentWindowRect, CommentWindow, "");
 

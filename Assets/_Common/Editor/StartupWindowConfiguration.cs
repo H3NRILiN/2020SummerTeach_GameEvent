@@ -20,16 +20,16 @@ namespace ISU.Common.HelpWindow
     [Serializable]
     public class SceneSet
     {
-        public bool active;
         public string name;
+        public bool active;
         public Lessons lesson;
         public SceneAsset scene;
         public Object folder;
         public Texture2D banner;
         [TextArea(5, 25)] public string description;
 
-        public AnimBool lessonOpen = new AnimBool(false);
-        public AnimBool moreInfoOpen = new AnimBool(false);
+        [HideInInspector] public AnimBool lessonOpen = new AnimBool(false);
+        [HideInInspector] public AnimBool moreInfoOpen = new AnimBool(false);
     }
 
     [Serializable]
@@ -39,7 +39,7 @@ namespace ISU.Common.HelpWindow
         public Object folder;
     }
 
-    [CreateAssetMenu]
+    // [CreateAssetMenu]
     public class StartupWindowConfiguration : ScriptableObject
     {
         public SceneSet[] m_SceneSettings;

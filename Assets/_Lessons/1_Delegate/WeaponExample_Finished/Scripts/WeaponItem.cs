@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    [CreateAssetMenu(menuName = "Lessons/1_Delegate/WeaponItem")]
+    [CreateAssetMenu(menuName = "Lessons/Delegate/WeaponItem")]
     public class WeaponItem : ScriptableObject
     {
         [SerializeField] string m_WeaponName;
