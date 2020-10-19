@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: New Startup Window Configuration
   m_EditorClassIdentifier: 
   m_SceneSettings:
-  - active: 1
-    name: "Delegate\u57FA\u672C"
+  - name: "Delegate\u57FA\u672C"
+    active: 1
     lesson: 0
     scene: {fileID: 102900000, guid: 77309ca6412c1414ba1c3976680c11b8, type: 3}
     folder: {fileID: 102900000, guid: 688193cc04dbe2a44be8617bd7631b41, type: 3}
@@ -37,8 +37,8 @@ MonoBehaviour:
       m_Target: 1
       speed: 2
       m_Value: 1
-  - active: 1
-    name: "Delegate\u6B66\u5668\u61C9\u7528"
+  - name: "Delegate\u6B66\u5668\u61C9\u7528"
+    active: 1
     lesson: 0
     scene: {fileID: 102900000, guid: f7fe0efc4ec9e434098992f666f2594c, type: 3}
     folder: {fileID: 102900000, guid: 2792d1f6f279bcc44bc5fa217742b902, type: 3}
@@ -53,8 +53,8 @@ MonoBehaviour:
       m_Target: 1
       speed: 2
       m_Value: 1
-  - active: 1
-    name: "UnityEvent\u5BC6\u78BC\u9580"
+  - name: "UnityEvent\u5BC6\u78BC\u9580"
+    active: 1
     lesson: 1
     scene: {fileID: 102900000, guid: 86b1e34b952ee924dbc265137ec9bd16, type: 3}
     folder: {fileID: 102900000, guid: d6c18d72095ac294585665fee3158c70, type: 3}
@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Target: 0
       speed: 2
       m_Value: 0
-  - active: 1
-    name: "ObserverPattern\u666E\u901A\u4E8B\u4EF6"
+  - name: "ObserverPattern\u666E\u901A\u4E8B\u4EF6"
+    active: 1
     lesson: 2
     scene: {fileID: 102900000, guid: 461d27cd27ec2584c97921d2ebfbc1cf, type: 3}
     folder: {fileID: 102900000, guid: 94ec0f03d2f05dc40972ef47218ef4aa, type: 3}
@@ -83,8 +83,8 @@ MonoBehaviour:
       m_Target: 1
       speed: 2
       m_Value: 1
-  - active: 1
-    name: "ObserverPattern\u975C\u614B\u4E8B\u4EF6"
+  - name: "ObserverPattern\u975C\u614B\u4E8B\u4EF6"
+    active: 1
     lesson: 2
     scene: {fileID: 102900000, guid: 88f1cd946a49f264c8bbcd117054b2c4, type: 3}
     folder: {fileID: 102900000, guid: cc367795e146dba49a06102c9008b939, type: 3}
@@ -98,23 +98,23 @@ MonoBehaviour:
       m_Target: 0
       speed: 2
       m_Value: 0
-  - active: 0
-    name: "\u904A\u6232\u4E8B\u4EF6"
+  - name: "\u904A\u6232\u4E8B\u4EF6"
+    active: 1
     lesson: 3
-    scene: {fileID: 0}
-    folder: {fileID: 0}
+    scene: {fileID: 102900000, guid: 394cdea422025a44e8ba0912c8e349e0, type: 3}
+    folder: {fileID: 102900000, guid: a336726f97ff886458f2f310a17d5f7f, type: 3}
     banner: {fileID: 0}
     description: 
     lessonOpen:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
     moreInfoOpen:
       m_Target: 0
       speed: 2
       m_Value: 0
-  - active: 1
-    name: "\u7D9C\u5408DEMO\u5834\u666F"
+  - name: "\u7D9C\u5408DEMO\u5834\u666F"
+    active: 1
     lesson: 4
     scene: {fileID: 102900000, guid: dc838297caa39824ca91a2f07b5aa9ea, type: 3}
     folder: {fileID: 102900000, guid: 4ee35f104296bde45ab5067979ab24aa, type: 3}

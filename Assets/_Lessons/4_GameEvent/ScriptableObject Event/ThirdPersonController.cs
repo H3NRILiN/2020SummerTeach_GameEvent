@@ -1,6 +1,8 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ThirdPersonController : MonoBehaviour
 {
@@ -10,16 +12,36 @@ public class ThirdPersonController : MonoBehaviour
         public float horizontal;
         public bool jump;
     }
+
+    public enum AxisMode
+    {
+        RawAxis,
+        Axis
+    }
     [SerializeField] CharacterController m_Controller;
+    [SerializeField] AxisMode m_AxisMode;
     [SerializeField] float m_Speed = 10;
     [SerializeField] float m_JumpHeight = 1;
+    [Space]
     [SerializeField] [Range(0, 1)] float m_RotationYDampTime = 0.1f;
+
+    [Space]
     [SerializeField] Transform m_Model;
     [SerializeField] [Range(0, 1)] float m_ModelScaleDampTime = 0.1f;
     [SerializeField] float m_ModelOnJumpScaleMultiply = 2;
     [SerializeField] float m_ModelOnLandScaleMultiply = 0.1f;
+    [Space]
     [SerializeField] [Range(0, 1)] float m_ModelTiltDampTime = 0.1f;
     [SerializeField] float m_ModelWalkingTiltZMultiply = -10;
+    [Space]
+    [SerializeField] ParticleSystem m_WalkParticle;
+    [SerializeField] float m_WalkingCycleSpeed = 8;
+    [SerializeField] float m_WalkingCyleScaleOffset = 0.15f;
+    [SerializeField] [Range(0, 0.5f)] float m_WalkingSoundThreshold = 0.14f;
+    [SerializeField] AudioSource m_WalkingSoundSource;
+    [SerializeField] AudioClip[] m_WalkingSoundClips;
+    [SerializeField] AudioClip m_JumpSound;
+    [SerializeField] AudioClip m_LandSound;
 
     Vector3 m_Movement = new Vector3();
     Vector3 m_Gravity;
@@ -27,7 +49,7 @@ public class ThirdPersonController : MonoBehaviour
     Vector3 m_ScaleDampVelocity;
     Vector3 m_AngleDampVelocity;
     bool m_WasGrounded;
-
+    bool m_WalkingSoundPlayed;
     float m_CurrentMagnitude = 0;
 
     bool m_OnGround => m_WasGrounded && m_WasGrounded == m_Controller.isGrounded;
@@ -36,6 +58,9 @@ public class ThirdPersonController : MonoBehaviour
     bool m_OnLanding => !m_WasGrounded && m_WasGrounded != m_Controller.isGrounded;
 
     bool m_OnMoving => m_CurrentMagnitude > 0;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,12 +72,26 @@ public class ThirdPersonController : MonoBehaviour
     void Update()
     {
         Movement(GetInput());
+
     }
+
+
     CInput GetInput()
     {
-        CInput input;
-        input.horizontal = Input.GetAxisRaw("Horizontal");
-        input.vertical = Input.GetAxisRaw("Vertical");
+        CInput input = new CInput();
+
+        switch (m_AxisMode)
+        {
+            case AxisMode.RawAxis:
+                input.horizontal = Input.GetAxisRaw("Horizontal");
+                input.vertical = Input.GetAxisRaw("Vertical");
+                break;
+            case AxisMode.Axis:
+                input.horizontal = Input.GetAxis("Horizontal");
+                input.vertical = Input.GetAxis("Vertical");
+                break;
+        }
+
         input.jump = Input.GetButtonDown("Jump");
         return input;
     }
@@ -88,7 +127,9 @@ public class ThirdPersonController : MonoBehaviour
 
         m_Controller.Move(m_Movement * Time.deltaTime);
 
-        WalkCycle();
+        WalkCycleAndJump();
+        WalkingVFX();
+
     }
 
     void Rotate(Vector3 direction)
@@ -118,7 +159,7 @@ public class ThirdPersonController : MonoBehaviour
         m_Model.rotation = Quaternion.Euler(xAngle, modelEuler.y, modelEuler.z);
     }
 
-    void WalkCycle()
+    void WalkCycleAndJump()
     {
         var scale = m_Model.localScale;
 
@@ -126,7 +167,12 @@ public class ThirdPersonController : MonoBehaviour
         {
             if (m_OnMoving)
             {
-                scale.y = m_ModelOriginalScale.y - Mathf.Abs(Mathf.Sin(Time.time * 8) * 0.15f);
+                var scaleCycle = Mathf.Abs(Mathf.Sin(Time.time * m_WalkingCycleSpeed) * m_WalkingCyleScaleOffset);
+                scale.y = m_ModelOriginalScale.y - scaleCycle;
+                if (scaleCycle <= m_WalkingSoundThreshold)
+                {
+                    WalkingSFX();
+                }
             }
             else
             {
@@ -141,16 +187,57 @@ public class ThirdPersonController : MonoBehaviour
 
         if (m_OnJumping)
         {
+            JumpingSFX();
             scale.y = m_ModelOriginalScale.y * m_ModelOnJumpScaleMultiply;
+
         }
         else if (m_OnLanding)
         {
+            LandingSFX();
             scale.y = m_ModelOriginalScale.y * m_ModelOnLandScaleMultiply;
         }
 
         m_Model.localScale = Vector3.SmoothDamp(m_Model.localScale, scale, ref m_ScaleDampVelocity, m_ModelScaleDampTime);
     }
 
+    private void WalkingVFX()
+    {
+        if (m_OnGround)
+        {
+            if (m_OnMoving)
+            {
+                if (!m_WalkParticle.isPlaying)
+                    m_WalkParticle.Play();
+            }
+            else
+            {
+                if (m_WalkParticle.isPlaying)
+                    m_WalkParticle.Stop();
+            }
+
+        }
+        else
+        {
+            if (m_WalkParticle.isPlaying)
+                m_WalkParticle.Stop();
+        }
+    }
+
+    void WalkingSFX()
+    {
+        m_WalkingSoundSource.PlayOneShot(m_WalkingSoundClips[Random.Range(0, m_WalkingSoundClips.Length)]);
+        m_WalkingSoundPlayed = true;
+    }
+
+    void JumpingSFX()
+    {
+        m_WalkingSoundSource.PlayOneShot(m_JumpSound);
+    }
+
+    void LandingSFX()
+    {
+        m_WalkingSoundSource.PlayOneShot(m_LandSound);
+    }
 
     // private void OnControllerColliderHit(ControllerColliderHit hit)
     // {

@@ -17,6 +17,10 @@ public class ObjectPointerUI : MonoBehaviour
     {
         m_CurrentObject = transform;
     }
+    public void OnTransformClear()
+    {
+        m_CurrentObject = null;
+    }
 
     private void Update()
     {

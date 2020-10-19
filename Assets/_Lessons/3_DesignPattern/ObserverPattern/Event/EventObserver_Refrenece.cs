@@ -2,65 +2,67 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-
-public class EventObserver_Refrenece : MonoBehaviour
+namespace ISU.Lesson.DesignPattern.Observer
 {
-    [SerializeField] string m_ObjectName = "物件";
-
-    [SerializeField] ConnectionLine m_Line;
-
-    bool m_SenderAssign;
-
-    Tween m_ProcessTween;
-
-    EventSender_Refrenece m_Sender;
-
-
-    private void OnEnable()
+    public class EventObserver_Refrenece : MonoBehaviour
     {
-        m_Sender = FindObjectOfType<EventSender_Refrenece>();
+        [SerializeField] string m_ObjectName = "物件";
 
-        m_Sender.m_OnEventSend += ReciveEvent;
-        m_Sender.m_OnRegisterEvent += RegisterEvent;
-        m_Sender.m_OnEventReset += ResetEvent;
-        m_Line.m_EndPoint = transform;
-    }
+        [SerializeField] ConnectionLine m_Line;
 
-    private void OnDisable()
-    {
-        // m_Sender.m_OnEventSend -= ReciveEvent;
-        // m_Sender.m_OnRegisterEvent -= RegisterEvent;
-        // m_Sender.m_OnEventReset -= ResetEvent;
-    }
+        bool m_SenderAssign;
 
-    void Start()
-    {
-    }
+        Tween m_ProcessTween;
 
-    private void Update()
-    {
-    }
+        EventSender_Refrenece m_Sender;
 
-    void ReciveEvent()
-    {
-        if (!m_ProcessTween.IsActive())
+
+        private void OnEnable()
         {
-            m_ProcessTween = DOTween.To(() => m_Line.m_Process, x => m_Line.m_Process = x, 1, 0.5f).
-                      OnComplete(() => Debug.Log($"名稱:{m_ObjectName}"));
+            m_Sender = FindObjectOfType<EventSender_Refrenece>();
+
+            m_Sender.m_OnEventSend += ReciveEvent;
+            m_Sender.m_OnRegisterEvent += RegisterEvent;
+            m_Sender.m_OnEventReset += ResetEvent;
+            m_Line.m_EndPoint = transform;
         }
 
-    }
+        private void OnDisable()
+        {
+            // m_Sender.m_OnEventSend -= ReciveEvent;
+            // m_Sender.m_OnRegisterEvent -= RegisterEvent;
+            // m_Sender.m_OnEventReset -= ResetEvent;
+        }
 
-    void RegisterEvent(Transform position)
-    {
-        m_Line.m_StartPoint = position;
-        ResetEvent();
-    }
+        void Start()
+        {
+        }
 
-    void ResetEvent()
-    {
-        if (m_ProcessTween.IsActive())
-            m_ProcessTween.Kill();
-        m_Line.m_Process = 0;
+        private void Update()
+        {
+        }
+
+        void ReciveEvent()
+        {
+            if (!m_ProcessTween.IsActive())
+            {
+                m_ProcessTween = DOTween.To(() => m_Line.m_Process, x => m_Line.m_Process = x, 1, 0.5f).
+                          OnComplete(() => Debug.Log($"名稱:{m_ObjectName}"));
+            }
+
+        }
+
+        void RegisterEvent(Transform position)
+        {
+            m_Line.m_StartPoint = position;
+            ResetEvent();
+        }
+
+        void ResetEvent()
+        {
+            if (m_ProcessTween.IsActive())
+                m_ProcessTween.Kill();
+            m_Line.m_Process = 0;
+        }
     }
 }

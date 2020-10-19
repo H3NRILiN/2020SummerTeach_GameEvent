@@ -2,66 +2,69 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public class EventObserver_Static : MonoBehaviour
+namespace ISU.Lesson.DesignPattern.Observer
 {
-    [SerializeField] string m_ObjectName = "物件";
-
-    [SerializeField] ConnectionLine m_Line;
-
-    [SerializeField] SpriteRenderer m_Sprite;
-
-    bool m_SenderAssign;
-
-    Tween m_ProcessTween;
-
-    private void OnEnable()
+    public class EventObserver_Static : MonoBehaviour
     {
-        EventSender_Static.m_OnEventSend += ReceiveEvent;
-        EventSender_Static.m_OnRegisterEvent += RegisterEvent;
-        EventSender_Static.m_OnEventReset += ResetEvent;
-        m_Line.m_EndPoint = transform;
-    }
+        [SerializeField] string m_ObjectName = "物件";
 
-    private void OnDisable()
-    {
-        EventSender_Static.m_OnEventSend -= ReceiveEvent;
-        EventSender_Static.m_OnRegisterEvent -= RegisterEvent;
-        EventSender_Static.m_OnEventReset -= ResetEvent;
-    }
+        [SerializeField] ConnectionLine m_Line;
 
-    void Start()
-    {
-    }
+        [SerializeField] SpriteRenderer m_Sprite;
 
-    private void Update()
-    {
-    }
+        bool m_SenderAssign;
 
-    void ReceiveEvent(Color color)
-    {
-        if (!m_ProcessTween.IsActive())
+        Tween m_ProcessTween;
+
+        private void OnEnable()
         {
-            m_Line.m_ProcessColor = color;
-            m_ProcessTween = DOTween.To(() => m_Line.m_Process, x => m_Line.m_Process = x, 1, 0.5f)
-            .OnComplete(() =>
-            {
-                Debug.Log($"名稱:{m_ObjectName}");
-                m_Sprite.color = color;
-            });
+            EventSender_Static.m_OnEventSend += ReceiveEvent;
+            EventSender_Static.m_OnRegisterEvent += RegisterEvent;
+            EventSender_Static.m_OnEventReset += ResetEvent;
+            m_Line.m_EndPoint = transform;
         }
 
-    }
+        private void OnDisable()
+        {
+            EventSender_Static.m_OnEventSend -= ReceiveEvent;
+            EventSender_Static.m_OnRegisterEvent -= RegisterEvent;
+            EventSender_Static.m_OnEventReset -= ResetEvent;
+        }
 
-    void RegisterEvent(Transform position)
-    {
-        m_Line.m_StartPoint = position;
-        ResetEvent();
-    }
+        void Start()
+        {
+        }
 
-    void ResetEvent()
-    {
-        if (m_ProcessTween.IsActive())
-            m_ProcessTween.Kill();
-        m_Line.m_Process = 0;
+        private void Update()
+        {
+        }
+
+        void ReceiveEvent(Color color)
+        {
+            if (!m_ProcessTween.IsActive())
+            {
+                m_Line.m_ProcessColor = color;
+                m_ProcessTween = DOTween.To(() => m_Line.m_Process, x => m_Line.m_Process = x, 1, 0.5f)
+                .OnComplete(() =>
+                {
+                    Debug.Log($"名稱:{m_ObjectName}");
+                    m_Sprite.color = color;
+                });
+            }
+
+        }
+
+        void RegisterEvent(Transform position)
+        {
+            m_Line.m_StartPoint = position;
+            ResetEvent();
+        }
+
+        void ResetEvent()
+        {
+            if (m_ProcessTween.IsActive())
+                m_ProcessTween.Kill();
+            m_Line.m_Process = 0;
+        }
     }
 }
