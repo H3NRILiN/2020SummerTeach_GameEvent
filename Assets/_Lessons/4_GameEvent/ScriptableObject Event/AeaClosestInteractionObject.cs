@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace ISU.Lesson.GameEvent
 {
-    public class AreaInteractionObject : MonoBehaviour
+    public class AeaClosestInteractionObject : MonoBehaviour
     {
         [SerializeField] GameObject m_Root;
 

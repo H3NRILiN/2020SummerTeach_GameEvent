@@ -169,7 +169,7 @@ public class ThirdPersonController : MonoBehaviour
             {
                 var scaleCycle = Mathf.Abs(Mathf.Sin(Time.time * m_WalkingCycleSpeed) * m_WalkingCyleScaleOffset);
                 scale.y = m_ModelOriginalScale.y - scaleCycle;
-                if (scaleCycle <= m_WalkingSoundThreshold)
+                if (scaleCycle >= m_WalkingSoundThreshold)
                 {
                     WalkingSFX();
                 }

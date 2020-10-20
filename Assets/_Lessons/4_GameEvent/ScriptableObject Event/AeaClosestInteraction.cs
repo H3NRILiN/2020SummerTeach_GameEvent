@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ISU.Lesson.GameEvent
 {
-    public class AreaInteraction : MonoBehaviour
+    public class AeaClosestInteraction : MonoBehaviour
     {
         [SerializeField] Transform m_HandPosition;
         [SerializeField] float m_DetectRadius;
@@ -58,7 +58,7 @@ namespace ISU.Lesson.GameEvent
                 if (!m_IsObjectPickup)
                 {
                     if (!m_ClosestObject) return;
-                    var interact = m_ClosestObject.GetComponent<AreaInteractionObject>();
+                    var interact = m_ClosestObject.GetComponent<AeaClosestInteractionObject>();
                     if (!interact) return;
                     interact.OnPickup(m_HandPosition);
 
