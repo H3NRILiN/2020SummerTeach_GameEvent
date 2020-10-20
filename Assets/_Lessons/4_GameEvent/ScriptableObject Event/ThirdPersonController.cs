@@ -18,22 +18,26 @@ public class ThirdPersonController : MonoBehaviour
         RawAxis,
         Axis
     }
+    //---------------------------------------------------------
     [SerializeField] CharacterController m_Controller;
     [SerializeField] AxisMode m_AxisMode;
     [SerializeField] float m_Speed = 10;
     [SerializeField] float m_JumpHeight = 1;
-    [Space]
+    //---------------------------------------------------------
+    [Space(10)]
     [SerializeField] [Range(0, 1)] float m_RotationYDampTime = 0.1f;
-
-    [Space]
+    //---------------------------------------------------------
+    [Space(10)]
     [SerializeField] Transform m_Model;
     [SerializeField] [Range(0, 1)] float m_ModelScaleDampTime = 0.1f;
     [SerializeField] float m_ModelOnJumpScaleMultiply = 2;
     [SerializeField] float m_ModelOnLandScaleMultiply = 0.1f;
-    [Space]
+    //---------------------------------------------------------
+    [Space(10)]
     [SerializeField] [Range(0, 1)] float m_ModelTiltDampTime = 0.1f;
     [SerializeField] float m_ModelWalkingTiltZMultiply = -10;
-    [Space]
+    //---------------------------------------------------------
+    [Space(10)]
     [SerializeField] ParticleSystem m_WalkParticle;
     [SerializeField] float m_WalkingCycleSpeed = 8;
     [SerializeField] float m_WalkingCyleScaleOffset = 0.15f;
@@ -42,7 +46,11 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] AudioClip[] m_WalkingSoundClips;
     [SerializeField] AudioClip m_JumpSound;
     [SerializeField] AudioClip m_LandSound;
-
+    //---------------------------------------------------------
+    [Space(10)]
+    [SerializeField] bool m_ShowVector;
+    //---------------------------------------------------------
+    Vector3 m_DesiredMovement = new Vector3();
     Vector3 m_Movement = new Vector3();
     Vector3 m_Gravity;
     Vector3 m_ModelOriginalScale;
@@ -51,30 +59,22 @@ public class ThirdPersonController : MonoBehaviour
     bool m_WasGrounded;
     bool m_WalkingSoundPlayed;
     float m_CurrentMagnitude = 0;
-
+    //---------------------------------------------------------
     bool m_OnGround => m_WasGrounded && m_WasGrounded == m_Controller.isGrounded;
     bool m_OnAirborne => !m_WasGrounded && m_WasGrounded == m_Controller.isGrounded;
     bool m_OnJumping => m_WasGrounded && m_WasGrounded != m_Controller.isGrounded;
     bool m_OnLanding => !m_WasGrounded && m_WasGrounded != m_Controller.isGrounded;
-
     bool m_OnMoving => m_CurrentMagnitude > 0;
-
-
-
-    // Start is called before the first frame update
+    //---------------------------------------------------------
     void Start()
     {
         m_Gravity = Physics.gravity;
         m_ModelOriginalScale = m_Model.localScale;
     }
-
-    // Update is called once per frame
     void Update()
     {
         Movement(GetInput());
-
     }
-
 
     CInput GetInput()
     {
@@ -95,21 +95,22 @@ public class ThirdPersonController : MonoBehaviour
         input.jump = Input.GetButtonDown("Jump");
         return input;
     }
+
     void Movement(CInput input)
     {
 
         m_WasGrounded = m_Controller.isGrounded;
         //暫存方向數值
-        Vector3 desiredMovement = new Vector3(input.horizontal, 0, input.vertical);
-        desiredMovement = desiredMovement.normalized;
-        m_CurrentMagnitude = desiredMovement.magnitude;
+        m_DesiredMovement = new Vector3(input.horizontal, 0, input.vertical);
+        m_DesiredMovement = m_DesiredMovement.normalized;
+        m_CurrentMagnitude = m_DesiredMovement.magnitude;
 
-        Rotate(desiredMovement);
+        Rotate(m_DesiredMovement);
 
 
         //併到Movement，除了y(重力)
-        m_Movement.x = desiredMovement.x * m_Speed;
-        m_Movement.z = desiredMovement.z * m_Speed;
+        m_Movement.x = m_DesiredMovement.x * m_Speed;
+        m_Movement.z = m_DesiredMovement.z * m_Speed;
 
 
         if (m_OnGround)
@@ -129,7 +130,6 @@ public class ThirdPersonController : MonoBehaviour
 
         WalkCycleAndJump();
         WalkingVFX();
-
     }
 
     void Rotate(Vector3 direction)
@@ -228,17 +228,26 @@ public class ThirdPersonController : MonoBehaviour
         m_WalkingSoundSource.PlayOneShot(m_WalkingSoundClips[Random.Range(0, m_WalkingSoundClips.Length)]);
         m_WalkingSoundPlayed = true;
     }
-
     void JumpingSFX()
     {
         m_WalkingSoundSource.PlayOneShot(m_JumpSound);
     }
-
     void LandingSFX()
     {
         m_WalkingSoundSource.PlayOneShot(m_LandSound);
     }
 
+
+    private void OnDrawGizmosSelected()
+    {
+        if (!m_ShowVector)
+            return;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + m_Movement);
+    }
     // private void OnControllerColliderHit(ControllerColliderHit hit)
     // {
     //     if (hit.rigidbody)

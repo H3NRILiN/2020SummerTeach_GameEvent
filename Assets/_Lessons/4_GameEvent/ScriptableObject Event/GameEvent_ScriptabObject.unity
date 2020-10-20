@@ -775,8 +775,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.8
+  m_Pitch: 0.5
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -819,7 +819,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.9
+      value: 0.95
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2972,24 +2972,19 @@ MonoBehaviour:
   m_WalkingSoundThreshold: 0.015
   m_WalkingSoundSource: {fileID: 449150873}
   m_WalkingSoundClips:
-  - {fileID: 8300000, guid: ad5976b0502c0f446b621f62b61ce711, type: 3}
-  - {fileID: 8300000, guid: d028598013938494f97ebe5fa6ae3d13, type: 3}
-  - {fileID: 8300000, guid: 47050faa5d07c254491234d99fed2dbb, type: 3}
-  - {fileID: 8300000, guid: 398400b6cf9b15a4f8ea903403e4bfad, type: 3}
-  - {fileID: 8300000, guid: 076242aa9321cea4e96a7d58ebbed09d, type: 3}
-  - {fileID: 8300000, guid: 69a69ebf0fa88ec4fb0d8d5eea7cde5f, type: 3}
-  - {fileID: 8300000, guid: 90bab496afa7f0c49995ac14ce4eae28, type: 3}
-  - {fileID: 8300000, guid: 6960ba271d4dcb24e827e8a2c227db1a, type: 3}
-  - {fileID: 8300000, guid: b3d3788aae4042c4e84f3cd00054b955, type: 3}
-  - {fileID: 8300000, guid: 9524c8d88fc94714ea99c6d4249710d3, type: 3}
-  - {fileID: 8300000, guid: 7de1cad38d4292f44a6b1376447b8518, type: 3}
-  - {fileID: 8300000, guid: 073784d42e7608446ace0f8287b49a1e, type: 3}
-  - {fileID: 8300000, guid: 7a9f8691b7fc50d42b74cdfeaa6054bf, type: 3}
-  - {fileID: 8300000, guid: 769385b1fe09f984680519b3762efbde, type: 3}
-  - {fileID: 8300000, guid: e001183040fa98740858fa78ec3fa24c, type: 3}
-  - {fileID: 8300000, guid: 8483edc0ddec02f4fba42c0a391dd39b, type: 3}
-  m_JumpSound: {fileID: 8300000, guid: 2f961e088d96eab44a7f0f32c39b06a9, type: 3}
-  m_LandSound: {fileID: 8300000, guid: 987f80516af44cc4cb38a0495e26bdf4, type: 3}
+  - {fileID: 8300000, guid: e92b69d4f5710824585c403757e35329, type: 3}
+  - {fileID: 8300000, guid: d8ed55d4a87438f43853e32395a2e883, type: 3}
+  - {fileID: 8300000, guid: 3809eee1bff28eb4e86f26e4f41d040d, type: 3}
+  - {fileID: 8300000, guid: 1e4d5072189d3bc4cbf953ab8e8d0391, type: 3}
+  - {fileID: 8300000, guid: 9ec5d04bd9160d64498d2ab63c7b71e5, type: 3}
+  - {fileID: 8300000, guid: 1db34221d1a18ad459d3f989520e5a32, type: 3}
+  - {fileID: 8300000, guid: 86189c948e6c55f4793243314a387689, type: 3}
+  - {fileID: 8300000, guid: 72fc611475f8afa46b2291e8ef23a940, type: 3}
+  - {fileID: 8300000, guid: 92f0c87b8717dae4bb2f7126451e18ef, type: 3}
+  - {fileID: 8300000, guid: 027d3becea782b847bb035a3fc052f02, type: 3}
+  m_JumpSound: {fileID: 8300000, guid: 94dceb1c0e539394e95ad93d5c86aeb9, type: 3}
+  m_LandSound: {fileID: 8300000, guid: c2c00d4b3de67cf40a2d98c3c920c39a, type: 3}
+  m_ShowVector: 0
 --- !u!143 &1640495856
 CharacterController:
   m_ObjectHideFlags: 0
