@@ -59,7 +59,9 @@ public class ThirdPersonController : MonoBehaviour
     bool m_WasGrounded;
     bool m_WalkingSoundPlayed;
     float m_CurrentMagnitude = 0;
+    Action<AudioClip> m_OnWalkingSourcePlay;
     //---------------------------------------------------------
+    //狀態區
     bool m_OnGround => m_WasGrounded && m_WasGrounded == m_Controller.isGrounded;
     bool m_OnAirborne => !m_WasGrounded && m_WasGrounded == m_Controller.isGrounded;
     bool m_OnJumping => m_WasGrounded && m_WasGrounded != m_Controller.isGrounded;
@@ -70,12 +72,18 @@ public class ThirdPersonController : MonoBehaviour
     {
         m_Gravity = Physics.gravity;
         m_ModelOriginalScale = m_Model.localScale;
+
+        m_OnWalkingSourcePlay = (x) => { m_WalkingSoundSource.PlayOneShot(x); m_WalkingSoundPlayed = true; };
     }
     void Update()
     {
         Movement(GetInput());
     }
 
+    /// <summary>
+    /// Input數值
+    /// </summary>
+    /// <returns></returns>
     CInput GetInput()
     {
         CInput input = new CInput();
@@ -96,6 +104,10 @@ public class ThirdPersonController : MonoBehaviour
         return input;
     }
 
+    /// <summary>
+    /// 移動相關
+    /// </summary>
+    /// <param name="input">Input數值</param>
     void Movement(CInput input)
     {
 
@@ -171,7 +183,13 @@ public class ThirdPersonController : MonoBehaviour
                 scale.y = m_ModelOriginalScale.y - scaleCycle;
                 if (scaleCycle >= m_WalkingSoundThreshold)
                 {
-                    WalkingSFX();
+                    if (!m_WalkingSoundPlayed)
+                        m_OnWalkingSourcePlay(m_WalkingSoundClips[Random.Range(0, m_WalkingSoundClips.Length)]);
+                }
+                else
+                {
+                    if (m_WalkingSoundPlayed)
+                        m_WalkingSoundPlayed = false;
                 }
             }
             else
@@ -187,13 +205,13 @@ public class ThirdPersonController : MonoBehaviour
 
         if (m_OnJumping)
         {
-            JumpingSFX();
+            m_OnWalkingSourcePlay(m_JumpSound);
             scale.y = m_ModelOriginalScale.y * m_ModelOnJumpScaleMultiply;
 
         }
         else if (m_OnLanding)
         {
-            LandingSFX();
+            m_OnWalkingSourcePlay(m_LandSound);
             scale.y = m_ModelOriginalScale.y * m_ModelOnLandScaleMultiply;
         }
 
@@ -222,21 +240,6 @@ public class ThirdPersonController : MonoBehaviour
                 m_WalkParticle.Stop();
         }
     }
-
-    void WalkingSFX()
-    {
-        m_WalkingSoundSource.PlayOneShot(m_WalkingSoundClips[Random.Range(0, m_WalkingSoundClips.Length)]);
-        m_WalkingSoundPlayed = true;
-    }
-    void JumpingSFX()
-    {
-        m_WalkingSoundSource.PlayOneShot(m_JumpSound);
-    }
-    void LandingSFX()
-    {
-        m_WalkingSoundSource.PlayOneShot(m_LandSound);
-    }
-
 
     private void OnDrawGizmosSelected()
     {

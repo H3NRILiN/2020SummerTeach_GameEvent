@@ -14,7 +14,7 @@ namespace ISU.Example
 
         public void OnAfterDeserialize()
         {
-            value = initialValue;
+
         }
 
         public void OnBeforeSerialize()

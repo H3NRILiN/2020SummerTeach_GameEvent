@@ -25,4 +25,4 @@ MonoBehaviour:
       goalCount: 3
     currentCount: 0
     active: 1
-    complete: 1
+    complete: 0

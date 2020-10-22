@@ -24,5 +24,5 @@ MonoBehaviour:
       requiredItem: {fileID: 11400000, guid: 8f6697cd2ee62e94c9ccb04cdb8a9463, type: 2}
       goalCount: 3
     currentCount: 0
-    active: 0
+    active: 1
     complete: 0

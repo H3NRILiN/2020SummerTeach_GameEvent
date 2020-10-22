@@ -5,22 +5,32 @@ using UnityEngine;
 
 namespace ISU.Lesson.GameEvent
 {
-    public class AeaClosestInteraction : MonoBehaviour
+    public enum DetectionMask
+    {
+        // [InspectorName("無")] None = 0,
+        [InspectorName("手拿物")] HandHoldObject = 1,
+        [InspectorName("放置位置")] DropZone = 2,
+    }
+    public class HandHoldInteraction : MonoBehaviour
     {
         [SerializeField] Transform m_HandPosition;
         [SerializeField] float m_DetectRadius;
         [SerializeField] LayerMask m_HitMask;
-        [SerializeField] TransformEvent m_OnClosestObjectGet;
+        [SerializeField] HandHoldObjectEvent m_OnClosestObjectGet;
         [SerializeField] VoidEvent m_OnClosestObjectLost;
         [SerializeField] AudioSource m_AudioSource;
         [SerializeField] AudioClip m_PickupSound;
 
-        Collider[] m_Colliders = new Collider[99];
+        Collider[] m_Colliders = new Collider[10];
 
         Transform m_ClosestObject;
         Transform m_LastClosestObj;
 
-        Action<Vector3> m_OnObjectDrop;
+        Action m_OnSelect;
+        Action m_OnDeselect;
+
+        Action m_OnClosestFound;
+        Action m_OnDetectedEmypty;
 
         bool m_IsObjectPickup;
 
@@ -30,27 +40,22 @@ namespace ISU.Lesson.GameEvent
         {
             m_HandLastPosition = m_HandPosition.position;
 
+            var mask = !m_IsObjectPickup ? DetectionMask.HandHoldObject : DetectionMask.DropZone;
 
-            if (!m_IsObjectPickup)
+
+            m_ClosestObject = GetClosestObject(mask);
+            if (m_LastClosestObj != m_ClosestObject)
             {
-                m_ClosestObject = GetClosestObject();
-
-                if (m_LastClosestObj != m_ClosestObject)
+                if (m_ClosestObject != null)
                 {
-                    if (m_ClosestObject != null)
-                    {
-                        m_OnClosestObjectGet.Raise(m_ClosestObject);
-                    }
-                    else
-                    {
-                        m_OnClosestObjectLost.Raise();
-                    }
+                    m_OnClosestObjectGet.Raise(HandHoldObject.GetObject(m_ClosestObject.GetInstanceID()));
                 }
-
-                m_LastClosestObj = m_ClosestObject;
+                else
+                {
+                    m_OnClosestObjectLost.Raise();
+                }
             }
-
-
+            m_LastClosestObj = m_ClosestObject;
 
 
             if (Input.GetButtonDown("Interact"))
@@ -58,51 +63,53 @@ namespace ISU.Lesson.GameEvent
                 if (!m_IsObjectPickup)
                 {
                     if (!m_ClosestObject) return;
-                    var interact = m_ClosestObject.GetComponent<AeaClosestInteractionObject>();
+                    var interact = m_ClosestObject.GetComponent<HandHoldObject>();
                     if (!interact) return;
-                    interact.OnPickup(m_HandPosition);
-
-                    m_OnObjectDrop = interact.OnDrop;
 
                     m_IsObjectPickup = true;
+                    m_OnDeselect = interact.OnDrop;
 
+                    interact.OnPickup(m_HandPosition);
                     m_AudioSource.PlayOneShot(m_PickupSound);
-
                     m_OnClosestObjectLost.Raise();
                 }
                 else
                 {
-                    m_OnObjectDrop(m_HandPosition.position - m_HandLastPosition);
-
-                    m_OnObjectDrop = null;
-
+                    m_OnDeselect();
                     m_IsObjectPickup = false;
-
+                    m_OnDeselect = null;
                     m_LastClosestObj = null;
-
-
                 }
             }
         }
 
-        private Transform GetClosestObject()
+        private Transform GetClosestObject(DetectionMask mask)
         {
-            Vector3 closestObject = transform.up * 999;
+            float closestDistence = Mathf.Infinity;
+
+
             Transform closest = null;
+            HandHoldObject script = null;
             int count = Physics.OverlapSphereNonAlloc(transform.position, m_DetectRadius, m_Colliders, m_HitMask);
             if (count > 0)
             {
                 for (int i = 0; i < count; i++)
                 {
-                    if (Vector3.SqrMagnitude(transform.position - m_Colliders[i].transform.position)
-                    < Vector3.SqrMagnitude(transform.position - closestObject))
+
+                    script = HandHoldObject.GetObject(m_Colliders[i].transform.GetInstanceID());
+                    if (!script || script.m_DetectionMask != mask)
+                        continue;
+
+                    var curDistence = Vector3.SqrMagnitude(transform.position - m_Colliders[i].transform.position);
+                    if (curDistence < closestDistence)
                     {
-                        closestObject = m_Colliders[i].transform.position;
+                        closestDistence = curDistence;
                         closest = m_Colliders[i].transform;
+                        continue;
                     }
+
                 }
             }
-
             return closest;
         }
 
