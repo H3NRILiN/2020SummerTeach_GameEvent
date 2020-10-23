@@ -24,6 +24,13 @@ namespace ISU.Lesson.Delegate.WeaponExample
 
         void SetUI(WeaponItem item)
         {
+            bool enable = item != null;
+            m_IconImg.gameObject.SetActive(enable);
+            m_NameTxt.gameObject.SetActive(enable);
+            m_DamageTxt.gameObject.SetActive(enable);
+
+            if (!enable) return;
+
             m_IconImg.sprite = item.Icon;
             m_NameTxt.ReplaceText("{name}", item.WeaponName);
             m_DamageTxt.ReplaceText("{damage}", item.Damage.ToString());

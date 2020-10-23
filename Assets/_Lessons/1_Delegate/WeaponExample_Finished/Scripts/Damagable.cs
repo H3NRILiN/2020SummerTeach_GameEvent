@@ -41,6 +41,7 @@ namespace ISU.Lesson.Delegate.WeaponExample
             if (m_CurrentHealth <= 0)
             {
                 Debugger.DebugLog($"<color=red>{m_CharacterName}死亡</color>");
+                gameObject.SetActive(false);
             }
         }
     }

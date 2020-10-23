@@ -1220,7 +1220,7 @@ PrefabInstance:
     - target: {fileID: 1465783132951125466, guid: cb69ed7753c0cff43bbd27325b6dd7a9,
         type: 3}
       propertyPath: m_Tips
-      value: "A - \u653B\u64CA\n\nQ - \u5207\u63DB\u6B66\u5668"
+      value: "A - \u653B\u64CA\n\n1~3 - \u5207\u63DB\u6B66\u5668 (3\u70BA\u62F3\u982D)"
       objectReference: {fileID: 0}
     - target: {fileID: 1465783132951125467, guid: cb69ed7753c0cff43bbd27325b6dd7a9,
         type: 3}

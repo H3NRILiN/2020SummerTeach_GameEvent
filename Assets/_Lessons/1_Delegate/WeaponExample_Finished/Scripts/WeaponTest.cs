@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ISU.Lesson.Delegate.WeaponExample
 {
@@ -9,9 +10,6 @@ namespace ISU.Lesson.Delegate.WeaponExample
         [SerializeField] WeaponItem[] m_Weapon;
         [SerializeField] bool m_ShowDebug;
 
-        int m_CurrentWeaponSlot;
-
-        WeaponItem m_CurrentWeapon { get { return m_Weapon[m_CurrentWeaponSlot]; } }
 
         public event Action<Damagable> m_OnAttack;
         public event Action<WeaponItem> m_OnWeaponSwitch;
@@ -29,7 +27,7 @@ namespace ISU.Lesson.Delegate.WeaponExample
         }
         private void Start()
         {
-            SwitchWeapon();
+            SwitchWeapon(1);
         }
 
         private void Update()
@@ -40,9 +38,19 @@ namespace ISU.Lesson.Delegate.WeaponExample
                 m_OnAttack?.Invoke(m_Damagable);
             }
             //切換武器
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                SwitchWeapon();
+                SwitchWeapon(1);
+            }
+            //切換武器
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                SwitchWeapon(2);
+            }
+            //切換武器
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                SwitchWeapon(3);
             }
             //傳送位置資訊
             if (m_OnDamagableExist != null)
@@ -51,16 +59,31 @@ namespace ISU.Lesson.Delegate.WeaponExample
             }
         }
 
-        private void SwitchWeapon()
+        private void SwitchWeapon(int input)
         {
-            m_CurrentWeaponSlot++;
-            m_CurrentWeaponSlot = (int)Mathf.Repeat(m_CurrentWeaponSlot, m_Weapon.Length);
+            input -= 1;
+            WeaponItem weapon = null;
 
-            m_OnWeaponSwitch?.Invoke(m_CurrentWeapon);
+            if (input < m_Weapon.Length)
+            {
+                weapon = m_Weapon[input];
+                Debugger.DebugLog($"切換到武器: {weapon.WeaponName}");
+                m_OnAttack = weapon.OnAttack;
+            }
+            else
+            {
+                Debugger.DebugLog($"切換到近戰");
+                m_OnAttack = FistAttack;
+            }
 
-            Debugger.DebugLog($"切換到武器: {m_CurrentWeapon.WeaponName}");
 
-            m_OnAttack = m_CurrentWeapon.OnAttack;
+            m_OnWeaponSwitch?.Invoke(weapon);
+
+        }
+
+        void FistAttack(Damagable target)
+        {
+            target.TakeDamage(Random.Range(2, 4));
         }
 
         bool IsDebugModeOn()
