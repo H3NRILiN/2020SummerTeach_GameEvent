@@ -16,13 +16,12 @@ namespace ISU.Lesson.GameEvent
         {
             m_Camera = Camera.main;
         }
-        public void OnTransformChange(HandHoldObject obj)
+        public void OnTransformChange(AreaInteractObject obj)
         {
-            m_CurrentObject = obj.transform;
-        }
-        public void OnTransformClear()
-        {
-            m_CurrentObject = null;
+            if (obj)
+                m_CurrentObject = obj.transform;
+            else
+                m_CurrentObject = null;
         }
 
         private void Update()

@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Lessons/3_DesignPattern/ObserverPattern/Static Event/ObserverPattern_StaticVer.unity
     guid: 88f1cd946a49f264c8bbcd117054b2c4
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/_Practice/Delegate1/P_Delegate.unity
+    guid: 277c58d5d86556c45aadea325ebd9f86
   m_configObjects: {}

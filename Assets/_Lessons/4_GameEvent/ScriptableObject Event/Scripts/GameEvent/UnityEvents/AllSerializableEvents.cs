@@ -11,3 +11,5 @@ public class UnityTransformEvent : UnityEvent<Transform> { }
 
 [Serializable]
 public class UnityHandHoldObjectEvent : UnityEvent<HandHoldObject> { }
+[Serializable]
+public class UnityAreaInteractObjectEvent : UnityEvent<AreaInteractObject> { }

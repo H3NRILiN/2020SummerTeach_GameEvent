@@ -10,16 +10,20 @@ namespace ISU.Lesson.GameEvent
         [SerializeField] Text m_Text;
         [SerializeField] string m_HoldObjectTip;
         [SerializeField] string m_DropZoneTip;
-        public void OnObjectGet(HandHoldObject obj)
+        public void OnObjectGet(AreaInteractObject obj)
         {
-            switch (obj.m_DetectionMask)
+            if (obj)
             {
-                case DetectionMask.HandHoldObject:
-                    SetText(m_HoldObjectTip);
-                    break;
-                case DetectionMask.DropZone:
-                    SetText(m_DropZoneTip);
-                    break;
+                switch (obj.m_ObjectType)
+                {
+                    case AreaInteractionType.Holding:
+                        SetText(m_HoldObjectTip);
+                        break;
+                }
+            }
+            else
+            {
+                SetText(m_HoldObjectTip);
             }
         }
 
