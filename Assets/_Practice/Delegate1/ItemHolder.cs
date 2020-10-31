@@ -35,13 +35,18 @@ public class ItemHolder : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        m_Group.blocksRaycasts = true;
+
         m_ItemImage.rectTransform.localScale = Vector2.one;
 
-        if (eventData.pointerPressRaycast.gameObject == null)
-            return;
-        m_OnItemDrop(eventData.pointerPressRaycast.gameObject.transform, m_ItemImage.sprite, () => gameObject.SetActive(false));
+        Transform match = null;
+        if (eventData.hovered.Count > 0)
+            match = eventData.hovered[0].transform;
 
+
+        m_OnItemDrop(match, m_ItemImage.sprite, () => gameObject.SetActive(false));
+
+
+        m_Group.blocksRaycasts = true;
     }
 }
 

@@ -16,16 +16,19 @@ public class Backpuck : MonoBehaviour, IDropHandler
 
     }
 
-    public void OnItemRecieve(Transform obj, Sprite image, Action OnBackpuckFound)
+    public void OnItemRecieve(Transform match, Sprite image, Action OnBackpuckFound)
     {
-        if (!obj && obj != transform)
+
+        if (match == null || match.GetInstanceID() != transform.GetInstanceID())
             return;
+
+
         OnBackpuckFound();
         m_ItemImage.sprite = image;
 
         m_Bubble.localScale = Vector3.zero;
 
-        var tween = m_Bubble.
+        m_Bubble.
                  DOScale(Vector3.one, 0.5f).
                  SetEase(Ease.OutBounce);
 

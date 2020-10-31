@@ -15,9 +15,13 @@ namespace ISU.Lesson.Delegate.BaseExample
             m_ActionFuncTest = FindObjectOfType<ActionFuncTest>();
             m_ActionFuncTest.m_OnDoThing += SayMyName;
         }
-
+        private void OnEnable()
+        {
+            //物件開啟時觸發
+        }
         private void OnDisable()
         {
+            //物件關閉時觸發
             m_DelegateTest.m_OnDoThing -= SayMyName;
             m_ActionFuncTest.m_OnDoThing -= SayMyName;
         }
