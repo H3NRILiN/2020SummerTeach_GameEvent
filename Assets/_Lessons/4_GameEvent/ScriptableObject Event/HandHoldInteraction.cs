@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ISU.Lesson.GameEvent
+namespace ISU.Lesson.GameEvent.Discarded
 {
     public enum DetectionMask
     {

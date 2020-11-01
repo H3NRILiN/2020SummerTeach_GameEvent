@@ -10,6 +10,6 @@ public class UnityVoidEvent : UnityEvent<Void> { }
 public class UnityTransformEvent : UnityEvent<Transform> { }
 
 [Serializable]
-public class UnityHandHoldObjectEvent : UnityEvent<HandHoldObject> { }
+public class UnityHandHoldObjectEvent : UnityEvent<ISU.Lesson.GameEvent.Discarded.HandHoldObject> { }
 [Serializable]
 public class UnityAreaInteractObjectEvent : UnityEvent<AreaInteractObject> { }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ISU.Lesson.GameEvent
+namespace ISU.Lesson.GameEvent.Discarded
 {
     public class HandHoldObjectUITip : MonoBehaviour
     {

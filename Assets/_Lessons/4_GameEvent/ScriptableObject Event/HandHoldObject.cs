@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-namespace ISU.Lesson.GameEvent
+namespace ISU.Lesson.GameEvent.Discarded
 {
     [SelectionBase]
     public class HandHoldObject : MonoBehaviour
