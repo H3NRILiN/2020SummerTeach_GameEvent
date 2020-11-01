@@ -26,7 +26,7 @@ namespace ISU.Lesson.GameEvent
             m_Collection.Remove(m_InstanceID);
         }
         #endregion
-
+        public Transform m_ParentObject;
         internal AreaInteractionType m_ObjectType;
         public bool m_UsingID;
         public string m_MatchID;
