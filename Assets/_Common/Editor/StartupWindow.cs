@@ -8,10 +8,12 @@ using UnityEditor.AnimatedValues;
 
 namespace ISU.Common.HelpWindow
 {
+
     public class StartupWindow : EditorWindow
     {
-
-        [SerializeField] StartupWindowConfiguration m_Settings;
+        const float WINDOW_WIDTH = 690;
+        const float WINDOW_HIEGHT = 500;
+        static StartupWindowConfiguration m_Settings;
 
         GUIStyle m_WindowTitleTextStyle = new GUIStyle();
         GUIStyle m_LessonTitleTextStyle = new GUIStyle();
@@ -26,25 +28,52 @@ namespace ISU.Common.HelpWindow
 
         string m_ActiveScenePath;
 
-        bool m_AlreadyStyleSet;
+        static bool m_AlreadyStyleSet;
         bool m_CommentWindowShow;
 
         Rect m_CommentWindowRect;
 
-        [MenuItem("Tools/ISU教學/幫助視窗")]
-        static void Init()
+        static void SetWindowCloseStatus()
         {
-            var window = GetWindow<StartupWindow>("ISU教學幫助視窗");
-            window.minSize = new Vector2(690, 500);
+            m_Settings.m_IsWindowOpened = false;
+            EditorUtility.SetDirty(m_Settings);
+        }
+        static void SetWindowOpenStatus()
+        {
+            m_Settings.m_IsWindowOpened = true;
+            EditorUtility.SetDirty(m_Settings);
         }
 
-        private void OnEnable()
+
+        [MenuItem("Tools/ISU教學/幫助視窗")]
+        static void InitThroughMenu()
         {
-            m_LinkIconContent = EditorGUIUtility.IconContent("BuildSettings.Web.Small");
-            m_CommentWindowRect = new Rect(10, 50, 300, 600);
+            SetWindowOpenStatus();
+            Init();
+        }
+
+        [InitializeOnLoadMethod]
+        static void Init()
+        {
 
             GetSetting();
 
+            if (!HasOpenInstances<StartupWindow>() && m_Settings.m_IsWindowOpened)
+            {
+                StartupWindow window = GetWindow<StartupWindow>("ISU教學幫助視窗");
+                window.minSize = new Vector2(WINDOW_WIDTH, WINDOW_HIEGHT);
+            }
+
+        }
+
+
+        private void OnEnable()
+        {
+            SetWindowOpenStatus();
+            m_LinkIconContent = EditorGUIUtility.IconContent("BuildSettings.Web.Small");
+            m_CommentWindowRect = new Rect(10, 50, 300, 600);
+
+            //GetSetting();
             foreach (var set in m_Settings.m_SceneSettings)
             {
                 set.lessonOpen.valueChanged.AddListener(Repaint);
@@ -52,18 +81,27 @@ namespace ISU.Common.HelpWindow
             }
         }
 
-        [InitializeOnLoadMethod]
-        void GetSetting()
+
+        private void OnDestroy()
+        {
+            SetWindowCloseStatus();
+        }
+
+        static void GetSetting()
         {
             m_AlreadyStyleSet = false;
+
             if (m_Settings == null)
             {
                 var guid = AssetDatabase.FindAssets("t:StartupWindowConfiguration").FirstOrDefault();
                 var path = AssetDatabase.GUIDToAssetPath(guid);
 
                 m_Settings = (StartupWindowConfiguration)AssetDatabase.LoadAssetAtPath(path, typeof(StartupWindowConfiguration));
+
+
             }
         }
+
         void StylesSet()
         {
             if (m_AlreadyStyleSet)
@@ -191,13 +229,13 @@ namespace ISU.Common.HelpWindow
             EditorGUI.EndDisabledGroup();
         }
 
-        bool m_DevMode;
+        bool m_DevMode = true;
         void DeveloperSettingButton()
         {
-            m_DevMode = true;
             if (m_DevMode)
             {
                 var content = new GUIContent(EditorGUIUtility.IconContent("SettingsIcon"));
+                content.tooltip = "開發人員用的設定檔，亂動可能會造成視窗讀取問題，但想改也是可以拉";
                 content.text = "";
                 if (GUILayout.Button(content))
                 {
@@ -233,10 +271,9 @@ namespace ISU.Common.HelpWindow
 
                 buttonContent.text = set.name;
                 buttonContent.tooltip = set.active ? tooltip : tooltip_indev;
-                GUILayout.BeginHorizontal();
+
                 if (GUILayout.Button(buttonContent, m_LessonTitleTextStyle, GUILayout.Width(buttonWidth))) lessonOpen.target = !lessonOpen.target;
-                if (alreadyInScene) EditorGUILayout.HelpBox(alreadyInSceneTip, MessageType.Info);
-                GUILayout.EndHorizontal();
+
 
                 #endregion
 
@@ -250,7 +287,13 @@ namespace ISU.Common.HelpWindow
 
                     Separator();
 
-                    LoadSceneButtonArea(alreadyInScene);
+                    GUILayout.BeginHorizontal();
+
+                    //讀取按鈕
+                    if (alreadyInScene) LoadSceneButtonArea(alreadyInScene, GUILayout.Height(30), GUILayout.Width(buttonWidth));
+                    else LoadSceneButtonArea(alreadyInScene, GUILayout.Height(30));
+                    if (alreadyInScene) EditorGUILayout.HelpBox(alreadyInSceneTip, MessageType.Info);
+                    GUILayout.EndHorizontal();
 
                     //顯示更多資訊
                     moreInfoOpen = MoreInfoArea(moreInfoOpen, set.description);
@@ -291,14 +334,14 @@ namespace ISU.Common.HelpWindow
             }
             EndCenterLayout();
         }
-        private void LoadSceneButtonArea(bool alreadyInScene)
+        private void LoadSceneButtonArea(bool alreadyInScene, params GUILayoutOption[] options)
         {
             //若已經在場景就取消按鈕互動
             EditorGUI.BeginDisabledGroup(alreadyInScene);
             {
                 var content = new GUIContent(EditorGUIUtility.IconContent("UnityLogo"));
                 content.text = "進入場景";
-                if (GUILayout.Button(content, m_ButtonStyle, GUILayout.Height(30)))
+                if (GUILayout.Button(content, m_ButtonStyle, options))
                 {
                     if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
                     {

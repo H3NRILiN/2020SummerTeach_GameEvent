@@ -1,23 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace ISU.Lesson.GameEvent
+using UnityEngine.Events;
+
+namespace Hanzs.Runtime.Interaction
 {
     public class InteractionStaticObject : AreaInteractObject
     {
-        public override void UnInteract()
-        {
-
-        }
-
+        [SerializeField] UnityEvent m_OnInteract;
+        [SerializeField] UnityEvent m_OnUnInteract;
         private void Awake()
         {
-
-        }
-        // Start is called before the first frame update
-        void Start()
-        {
-
+            _ObjectType = AreaInteractionType.Static;
         }
 
         // Update is called once per frame
@@ -25,5 +19,18 @@ namespace ISU.Lesson.GameEvent
         {
 
         }
+
+        public override void OnInteract()
+        {
+            base.OnInteract();
+
+            m_MatchedObject.m_MatchedObject = this;
+
+            m_OnInteract.Invoke();
+        }
+        public override void OnUnInteract()
+        {
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using UnityEngine.Events;
 using System;
 using ISU.Lesson.GameEvent;
+using Hanzs.Runtime.Interaction;
 
 [Serializable]
 public class UnityVoidEvent : UnityEvent<Void> { }

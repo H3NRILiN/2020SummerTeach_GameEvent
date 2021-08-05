@@ -42,9 +42,12 @@ namespace ISU.Common.HelpWindow
     // [CreateAssetMenu]
     public class StartupWindowConfiguration : ScriptableObject
     {
+        public bool m_IsWindowOpened;
         public SceneSet[] m_SceneSettings;
 
         public FolderSet[] folder;
+
+        public string[] m_Lessons;
 
         private void OnEnable()
         {

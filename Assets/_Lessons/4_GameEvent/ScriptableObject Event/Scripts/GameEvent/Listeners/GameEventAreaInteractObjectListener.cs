@@ -1,4 +1,5 @@
 ﻿
+using Hanzs.Runtime.Interaction;
 using UnityEngine;
 
 namespace ISU.Lesson.GameEvent

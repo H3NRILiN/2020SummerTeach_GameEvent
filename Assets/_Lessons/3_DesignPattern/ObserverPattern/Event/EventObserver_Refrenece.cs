@@ -29,9 +29,9 @@ namespace ISU.Lesson.DesignPattern.Observer
 
         private void OnDisable()
         {
-            // m_Sender.m_OnEventSend -= ReciveEvent;
-            // m_Sender.m_OnRegisterEvent -= RegisterEvent;
-            // m_Sender.m_OnEventReset -= ResetEvent;
+            m_Sender.m_OnEventSend -= ReciveEvent;
+            m_Sender.m_OnRegisterEvent -= RegisterEvent;
+            m_Sender.m_OnEventReset -= ResetEvent;
         }
 
         void Start()

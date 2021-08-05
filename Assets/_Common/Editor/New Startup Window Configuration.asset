@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be47b2860de733245902c63a287f69fa, type: 3}
   m_Name: New Startup Window Configuration
   m_EditorClassIdentifier: 
+  m_IsWindowOpened: 0
   m_SceneSettings:
   - name: "Delegate\u57FA\u672C"
     active: 1
@@ -63,22 +64,22 @@ MonoBehaviour:
     scene: {fileID: 102900000, guid: 86b1e34b952ee924dbc265137ec9bd16, type: 3}
     folder: {fileID: 102900000, guid: d6c18d72095ac294585665fee3158c70, type: 3}
     banner: {fileID: 2800000, guid: fa830ff0b743e2547bead2a4eb88fffa, type: 3}
-    description: 
+    description: "\u5BC6\u78BC\uFF1A87569"
     lessonOpen:
       m_Target: 1
       speed: 2
       m_Value: 1
     moreInfoOpen:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
   - name: "ObserverPattern\u666E\u901A\u4E8B\u4EF6"
     active: 1
     lesson: 2
     scene: {fileID: 102900000, guid: 461d27cd27ec2584c97921d2ebfbc1cf, type: 3}
     folder: {fileID: 102900000, guid: 94ec0f03d2f05dc40972ef47218ef4aa, type: 3}
     banner: {fileID: 2800000, guid: 802461482d8e9ac47a11cdceff8b8fc0, type: 3}
-    description: 
+    description: "\u6709\u610F\u60F3\u5C07Console\u8A0A\u606F\u8F49\u79FB\u5230\u756B\u9762\u6703\u6BD4\u8F03\u597D\u61C2"
     lessonOpen:
       m_Target: 1
       speed: 2
@@ -93,37 +94,37 @@ MonoBehaviour:
     scene: {fileID: 102900000, guid: 88f1cd946a49f264c8bbcd117054b2c4, type: 3}
     folder: {fileID: 102900000, guid: cc367795e146dba49a06102c9008b939, type: 3}
     banner: {fileID: 2800000, guid: 09b1f1127525f814d9821b6bcde6c072, type: 3}
-    description: 
+    description: "\u53EA\u662F\u975C\u614B\u7248\u672C"
     lessonOpen:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
     moreInfoOpen:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
   - name: "\u904A\u6232\u4E8B\u4EF6"
     active: 1
     lesson: 3
     scene: {fileID: 102900000, guid: 394cdea422025a44e8ba0912c8e349e0, type: 3}
     folder: {fileID: 102900000, guid: a336726f97ff886458f2f310a17d5f7f, type: 3}
     banner: {fileID: 0}
-    description: 
+    description: "GITHUB\u904E\u4E45\u6C92\u6709commit\uFF0C\u67D0\u6B21\u64CD\u4F5C\u4E0D\u5C0F\u5FC3undo\u6240\u6709\u4FEE\u6539\uFF0C\u5DF2\u7D93\u7121\u6CD5\u56DE\u5FA9\n\u6709\u90E8\u5206\u7A0B\u5F0F\u78BC\u6709\u4FDD\u7559\uFF0C\u4F46\u9700\u8981\u6642\u9593\u91CD\u65B0\u5EFA\u7ACB"
     lessonOpen:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
     moreInfoOpen:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
   - name: "\u7D9C\u5408DEMO\u5834\u666F"
     active: 0
     lesson: 4
     scene: {fileID: 102900000, guid: dc838297caa39824ca91a2f07b5aa9ea, type: 3}
     folder: {fileID: 102900000, guid: 4ee35f104296bde45ab5067979ab24aa, type: 3}
     banner: {fileID: 2800000, guid: 5ce11a44c7f74bf478dfcf7599944474, type: 3}
-    description: 
+    description: "\u672A\u77E5BUG"
     lessonOpen:
       m_Target: 1
       speed: 2
@@ -141,3 +142,4 @@ MonoBehaviour:
     folder: {fileID: 102900000, guid: 28b1755a05c9f4f408ed4bb6c35c7ce9, type: 3}
   - lesson: 3
     folder: {fileID: 102900000, guid: f765bcd19866e2c47b9b67448cf9b87d, type: 3}
+  m_Lessons: []

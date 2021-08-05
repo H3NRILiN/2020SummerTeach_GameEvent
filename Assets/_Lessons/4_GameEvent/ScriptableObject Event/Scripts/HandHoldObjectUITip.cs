@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Hanzs.Runtime.Interaction;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ namespace ISU.Lesson.GameEvent
         {
             if (obj)
             {
-                switch (obj.m_ObjectType)
+                switch (obj._ObjectType)
                 {
                     case AreaInteractionType.Holding:
                         SetText(m_HoldObjectTip);

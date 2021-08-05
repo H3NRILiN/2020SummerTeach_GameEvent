@@ -780,7 +780,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168358514}
   m_LocalRotation: {x: 0.23088205, y: -0.00000004678184, z: 0.000000011101016, w: 0.97298175}
-  m_LocalPosition: {x: 0.0000005540793, y: 6.3914566, z: -1.9397782}
+  m_LocalPosition: {x: 0.0000007924979, y: 6.3914566, z: -1.9397782}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1067426667}
@@ -5532,7 +5532,7 @@ PrefabInstance:
     - target: {fileID: 4591292753110648477, guid: d7d7ec456ca57884daffe32014156a16,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0000005540793
+      value: 0.0000007924979
       objectReference: {fileID: 0}
     - target: {fileID: 4591292753110648477, guid: d7d7ec456ca57884daffe32014156a16,
         type: 3}
@@ -6514,11 +6514,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DetectCenter: {fileID: 1879879378}
   m_DetectRadius: 2
-  m_DetectionYRange: 0.545
+  m_DetectAngleCheckRadius: 0.29
+  m_DetectionYRange: 0.603
+  m_DetectionForwordAngle: 84.6
   m_DetectLayers:
     serializedVersion: 2
     m_Bits: 512
   m_DebugMode: 1
+  m_ShowDetectRanges: 1
+  m_ShowObjectsPositionInfo: 1
+  m_ShowCombinationArrow: 1
+  m_ShowAllDetectedObject: 1
 --- !u!114 &1879879376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6610,7 +6616,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6869d35475dac15429de9656f1b491ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OnObjectFound: {fileID: 11400000, guid: fb265e38e06a0594c9e58b7efc7c943d, type: 2}
   m_HoldingParent: {fileID: 733495542}
 --- !u!1 &1886055483 stripped
 GameObject:
